@@ -17,8 +17,9 @@ class User extends Migration
             $table->string('fname');
             $table->string('lname');
             $table->string('email')->primary();
-            $table->string('Notelp');
-            $table->string('Password');
+            $table->string('notelp');
+            $table->string('password');
+            $table->string('level');
             $table->integer('status');
             $table->timestamps();
         });

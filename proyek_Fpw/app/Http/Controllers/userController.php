@@ -14,26 +14,16 @@ class userController extends Controller
         $pass = $req->input('pass');
         $found = false;
         $dat_user = userModel::all();
-        $credentials = $req->only('username', 'password');
+        $credentials = $req->only('email', 'pass');
         if(Auth::attempt($credentials)){
-            foreach ($dat_user as $value) {
-                if($value->Email == $email){
-                    $found = true;
-                    if($value->Password == $pass){
-                        if($value->status == 1){
-                            $users = $value;
-                            $user = Auth::user();
-                            return view('profile');
-                        }else if ($value->status == 0){
-                            return redirect('/')->with("akun_Ban","akun anda terkena ban");
-                        }
-                    }
-                }
+            $user = Auth::user();
+            if($user->level == "admin"){
+                return redirect()->route('admin');
+            }else if ($user->level == "user"){
+                return redirect()->route('homepage');
             }
         }
-        if($found == false){
-            return redirect('/')->with("error_email","Email/Password ada benar");
-        }
+        return redirect('');
     }
 
     public function logout(Request $request) {
