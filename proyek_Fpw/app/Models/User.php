@@ -9,8 +9,8 @@ class User extends Model
 {
     use HasFactory;
     protected $table = 'user';
-    protected $fillable = ['fname','lname','email','notelp','password','status', 'saldo'];
+    protected $fillable = ['fname','lname','email','notelp','password','level','status', 'saldo'];
     protected $primaryKey   = "email";
     public $incrementing    = false;
-    public $timestamps      = true;
+    public $timestamps      = false;
 }

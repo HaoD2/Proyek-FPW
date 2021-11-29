@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,5 @@ Route::get('/toLogin', function(){
 Route::get('/toRegister', function(){
     return view('register');
 });
+
+Route::get('/register', [userController::class,'doRegister'])->name('register');

@@ -26,6 +26,50 @@ class userController extends Controller
         return redirect('');
     }
 
+    public function doRegister(Request $req){
+        $valid=[
+            "fname"=> ["required"],
+            "lname"=> ["required"],
+            "email"=> ["required"],
+            "telnum"=>["required","digits_between:10,12"],
+            "password_confirmation"=>["required"],
+            "password"=>["required","confirmed"],
+        ];
+        $msg = [
+            "telnum.digits_between:10,12"=>"jumlah angka harus diantara 10-12",
+           "pass.confirmed"=>"password harus sama dengan konfirmasi"
+        ];
+        $this->validate($req,$valid,$msg);
+        $check_same = User::where('email','=',$req->email)->get();
+        $level= "user";
+        $status = "1";
+        $saldo = 0;
+        if(count($check_same) > 0)
+        {
+            return response()->json("email already exist !");
+        }
+        else {
+            try {
+                User::create(
+                    [
+                        "fname" => $req->fname,
+                        "lname" => $req->lname,
+                        "email" => $req->email,
+                        "notelp" => $req->telnum,
+                        "password" => $req->password,
+                        "level" => $level,
+                        "status"=> $status,
+                        "saldo"=>$saldo
+                    ]
+                );
+            } catch (\Exception $e) {
+                return response()->json($e->getMessage());
+            }
+
+            return back()->with('msg','Register Success!');
+        }
+    }
+
     public function logout(Request $request) {
         Session::flush();
         Auth::logout();

@@ -21,6 +21,7 @@ class User extends Migration
             $table->string('password');
             $table->string('level');
             $table->integer('status');
+            $table->integer('saldo');
             $table->timestamps();
         });
     }
