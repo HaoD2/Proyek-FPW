@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
                'password'=> Hash::make('admin'),
                'level'=> 'admin',
                'status'=> '1',
+               'saldo' => 0
             ],
             [
                 'fname' => 'John',
@@ -35,8 +36,10 @@ class UserSeeder extends Seeder
                 'password'=> Hash::make('johnganteng'),
                 'level'=> 'user',
                 'status'=> '1',
+                'saldo' => 0
+
             ],
         ];
-        DB::table('users')->insert($user);
+        DB::table('user')->insert($user);
     }
 }

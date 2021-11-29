@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\userModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -13,7 +13,7 @@ class userController extends Controller
         $email = $req->input('email');
         $pass = $req->input('pass');
         $found = false;
-        $dat_user = userModel::all();
+        $dat_user = User::all();
         $credentials = $req->only('email', 'pass');
         if(Auth::attempt($credentials)){
             $user = Auth::user();

@@ -1,4 +1,5 @@
 @section('head')
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Navbar scroll</a>
@@ -28,7 +29,10 @@
                 </form>
               </li>
         </ul>
-            <button class="btn btn-outline-success" onclick="showLogin()">Login</button>
+            <button class="btn btn-outline-success" onclick="location.href='{{ url('toRegister') }}'">Daftar</button></form> &nbsp;
+
+            <button class="btn btn-outline-success" onclick="location.href='{{ url('toLogin') }}'">Login</button></form>
       </div>
     </div>
   </nav>
+  @endsection

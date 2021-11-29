@@ -13,7 +13,7 @@ class User extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             $table->string('fname');
             $table->string('lname');
             $table->string('email')->primary();
