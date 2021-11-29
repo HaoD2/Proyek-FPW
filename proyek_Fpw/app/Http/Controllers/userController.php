@@ -10,11 +10,16 @@ use Illuminate\Support\Facades\Session;
 class userController extends Controller
 {
     public function doLogin(Request $req){
+        $valid=[
+            "email"=> ["required"],
+            "password"=>["required","confirmed"],
+        ];
+        $this->validate($req,$valid);
         $email = $req->input('email');
-        $pass = $req->input('pass');
+        $pass = $req->input('password');
         $found = false;
         $dat_user = User::all();
-        $credentials = $req->only('email', 'pass');
+        $credentials = $req->only('email', 'password');
         if(Auth::attempt($credentials)){
             $user = Auth::user();
             if($user->level == "admin"){

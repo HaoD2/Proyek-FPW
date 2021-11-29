@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="registration-form">
-        <form>
+        <form action="{{route('login')}}" method="GET">
             <button type="button" class="btn btn-danger" onclick="location.href='{{ url('/') }}'">Kembali</button>
 
             <div class="form-icon">
@@ -26,10 +26,10 @@
 
 
             <div class="form-group">
-                <input type="text" class="form-control item" id="username" placeholder="email">
+                <input type="text" class="form-control item" name="email" id="email" placeholder="email">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control item" id="password" placeholder="password">
+                <input type="password" class="form-control item" name="password" id="password" placeholder="password">
             </div>
             <div class="form-group">
                 <div>Tidak mempunyai akun? <a href="toRegister">Klik saya</a></div>

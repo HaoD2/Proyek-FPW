@@ -27,3 +27,5 @@ Route::get('/toRegister', function(){
 });
 
 Route::get('/register', [userController::class,'doRegister'])->name('register');
+
+Route::get('/login', [userController::class,'doLogin'])->name('login');
