@@ -1,17 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    @include('template.homepage.header')
-</head>
-<body>
-    @yield('head')
+@extends('template.homepage.main')
 
-</body>
-</html>
+@section('mainContent')
+<div class="box">
+    <div class="container">
+        <a href="#" class="previous round">&#8249;</a>
+        <a href="#" class="next round">&#8250;</a>
+    </div>
+</div>
+
+<div class="main">
+    <div class="bottomline"><h2>Featured Item</h2></div>
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+</div>
+@endsection
+
+@section('secondContent')
+
+@endsection
+
+@section('customStyle')
+<style>
+.box{
+    width:100vw;
+    height:200px;
+    background-color: white;
+    padding: 10px;
+    border-bottom-left-radius: 75px;
+    border-bottom-right-radius: 75px;
+}
+
+.card{
+    width:250px;
+    height:300px;
+    background-color: white;
+    padding: 5px;
+    margin:20px;
+    float: left;
+}
+
+.main{
+    width:90%;
+    margin:0 auto;
+    margin-top:200px;
+    height: auto;
+}
+h2{
+    border-bottom:1px solid gray;
+}
+
+.container {
+    margin-top:30px;
+    border-radius: 10px;
+    background-color:teal;
+    width:100%;
+    height:20vw;
+    padding: 20px;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.previous {
+  margin-top:7vw;
+  background-color: #f1f1f1;
+  position: absolute;
+  font-weight: 900;
+  color: black;
+}
+
+.next {
+  margin-top:7vw;
+  float: right;
+  background-color: #f1f1f1;
+  font-weight: 900;
+  color: black;
+}
+
+.round {
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+</style>
+@endsection
