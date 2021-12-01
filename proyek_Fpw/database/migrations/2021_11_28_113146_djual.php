@@ -16,9 +16,9 @@ class Djual extends Migration
         Schema::create('djual', function (Blueprint $table) {
             $table->id();
             $table->string('email_pembeli');
-            $table->foreign('email_pembeli')->references('email')->on('users')->onDelete('cascade');
+            $table->foreign('email_pembeli')->references('email')->on('user')->onDelete('cascade');
             $table->string('email_penjual');
-            $table->foreign('email_penjual')->references('email')->on('users')->onDelete('cascade');
+            $table->foreign('email_penjual')->references('email')->on('user')->onDelete('cascade');
             $table->unsignedBigInteger('id_barang');
             $table->foreign('id_barang')->references('id')->on('barang')->onDelete('cascade');
             $table->string('alamat');

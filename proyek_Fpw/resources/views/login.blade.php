@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>The Easiest Way to Add Input Masks to Your Forms</title>
+    <title>Login</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/style.css'); }} ">
@@ -24,7 +24,6 @@
 
             </div>
 
-
             <div class="form-group">
                 <input type="text" class="form-control item" name="email" id="email" placeholder="email">
             </div>
@@ -32,12 +31,12 @@
                 <input type="password" class="form-control item" name="password" id="password" placeholder="password">
             </div>
             <div class="form-group">
+                <button class="btn btn-block create-account" type="submit">Login</button>
+            </div>
+            <div class="form-group">
                 <div>Tidak mempunyai akun? <a href="toRegister">Klik saya</a></div>
             </div>
 
-            <div class="form-group">
-                <button type="button" class="btn btn-block create-account">Login</button>
-            </div>
         </form>
         {{-- <div class="social-media">
             <h5>Sign up with social media</h5>

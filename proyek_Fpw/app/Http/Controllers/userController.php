@@ -3,32 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Facade\Ignition\DumpRecorder\Dump;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class userController extends Controller
 {
     public function doLogin(Request $req){
-        $valid=[
+        $credentials = $req->validate([
             "email"=> ["required"],
-            "password"=>["required","confirmed"],
-        ];
-        $this->validate($req,$valid);
-        $email = $req->input('email');
-        $pass = $req->input('password');
-        $found = false;
-        $dat_user = User::all();
-        $credentials = $req->only('email', 'password');
+            "password"=>["required"],
+        ]);
         if(Auth::attempt($credentials)){
             $user = Auth::user();
             if($user->level == "admin"){
                 return redirect()->route('admin');
+
             }else if ($user->level == "user"){
-                return redirect()->route('homepage');
+                $req->session()->regenerate();
+                return redirect()->route('');
             }
         }
-        return redirect('');
     }
 
     public function doRegister(Request $req){
@@ -61,7 +58,7 @@ class userController extends Controller
                         "lname" => $req->lname,
                         "email" => $req->email,
                         "notelp" => $req->telnum,
-                        "password" => $req->password,
+                        "password" => Hash::make($req->password),
                         "level" => $level,
                         "status"=> $status,
                         "saldo"=>$saldo

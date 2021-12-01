@@ -16,7 +16,7 @@ class Hjual extends Migration
         Schema::create('hjual', function (Blueprint $table) {
             $table->id();
             $table->string('email_pembeli');
-            $table->foreign('email_pembeli')->references('email')->on('users')->onDelete('cascade');
+            $table->foreign('email_pembeli')->references('email')->on('user')->onDelete('cascade');
             $table->integer('total_pembelian');
             $table->timestamps();
         });

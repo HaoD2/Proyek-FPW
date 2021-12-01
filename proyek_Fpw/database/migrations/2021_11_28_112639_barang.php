@@ -20,7 +20,7 @@ class Barang extends Migration
             $table->string('deskripsi');
             $table->integer('harga');
             $table->string('email_penjual');
-            $table->foreign('email_penjual')->references('email')->on('users')->onDelete('cascade');
+            $table->foreign('email_penjual')->references('email')->on('user')->onDelete('cascade');
             $table->timestamps();
         });
     }
