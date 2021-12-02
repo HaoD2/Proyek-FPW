@@ -26,6 +26,8 @@ class userController extends Controller
                 $req->session()->regenerate();
                 return view('homepage');
             }
+        }else{
+            return redirect('toLogin');
         }
     }
 
