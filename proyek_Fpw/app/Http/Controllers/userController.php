@@ -20,7 +20,7 @@ class userController extends Controller
             $user = Auth::user();
             if($user->level == "admin"){
                 $req->session()->regenerate();
-                return redirect()->route('admin');
+                return view('admin');
 
             }else if ($user->level == "user"){
                 $req->session()->regenerate();
