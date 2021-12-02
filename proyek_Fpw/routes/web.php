@@ -33,7 +33,7 @@ Route::get('/register', [userController::class,'doRegister'])->name('register');
 Route::get('/login', [userController::class,'doLogin'])->name('login');
 
 Route::get('/getSphread',[ExcelController::class,'getSphreadExcel'])->name('donwload');
-
+Route::get('/log',[userController::class,'logout']);
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin', function(){
         return view('admin');

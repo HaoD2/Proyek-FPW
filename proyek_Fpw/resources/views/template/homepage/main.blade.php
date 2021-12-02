@@ -1,8 +1,11 @@
-@if(Auth::user()->level == "admin")
-<script type="text/javascript">
-    window.location="{{URL::to('admin')}}";
-</script>
+@if (Auth::check())
+    @if(Auth::user()->level == "admin")
+    <script type="text/javascript">
+        window.location="{{URL::to('admin')}}";
+    </script>
+    @endif
 @endif
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,3 +28,4 @@
     @include('template.homepage.footer')
 </body>
 </html>
+

@@ -13,6 +13,7 @@
 <body>
     <div class="registration-form">
         <form action="{{route('login')}}" method="GET">
+            @csrf
             <button type="button" class="btn btn-danger" onclick="location.href='{{ url('/') }}'">Kembali</button>
 
             <div class="form-icon">

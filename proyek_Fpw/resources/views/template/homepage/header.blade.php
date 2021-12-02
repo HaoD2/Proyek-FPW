@@ -27,8 +27,15 @@
                 </form>
               </li>
         </ul>
+        @if (Auth::check())
+            @if (Auth::user()->level == "user")
+            <p class="fs-5 my-2">Welcome ,{{ Auth::user()->fname . Auth::user()->lname }}</p>
+            <button class="btn btn-outline-danger" onclick="location.href='{{ url('/log') }}'">Logout</button></form>&nbsp;
+            @endif
+        @else
             <button class="btn btn-outline-success" onclick="location.href='{{ url('toRegister') }}'">Daftar</button></form> &nbsp;
             <button class="btn btn-outline-success" onclick="location.href='{{ url('toLogin') }}'">Login</button></form>
+        @endif
       </div>
     </div>
 </nav>
