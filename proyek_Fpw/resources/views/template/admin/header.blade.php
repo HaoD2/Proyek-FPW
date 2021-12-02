@@ -7,8 +7,8 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="#">AddItem</a></li>
-                    <form id="form4" action="/toLogin" method="get">
-                        <li class="nav-item"><a class="nav-link" href="javascript:;" onclick="document.getElementById('form4').submit();">Logout</a></li>
+                    <form id="form1" action="/toLogin" method="get">
+                        <li class="nav-item"><a class="nav-link" href="javascript:;" onclick="document.getElementById('form1').submit();">Logout</a></li>
                     </form>
                 </ul>
             </div>

@@ -38,6 +38,7 @@
     background-color: white;
     padding: 5px;
     margin:20px;
+    margin-left: 32px;
     float: left;
 }
 
