@@ -19,11 +19,12 @@ class userController extends Controller
         if(Auth::attempt($credentials)){
             $user = Auth::user();
             if($user->level == "admin"){
+                $req->session()->regenerate();
                 return redirect()->route('admin');
 
             }else if ($user->level == "user"){
                 $req->session()->regenerate();
-                return redirect()->route('');
+                return view('homepage');
             }
         }
     }

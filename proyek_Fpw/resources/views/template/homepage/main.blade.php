@@ -1,3 +1,8 @@
+@if(Auth::user()->level == "admin")
+<script type="text/javascript">
+    window.location="{{URL::to('admin')}}";
+</script>
+@endif
 <!DOCTYPE html>
 <html lang="en">
 <head>

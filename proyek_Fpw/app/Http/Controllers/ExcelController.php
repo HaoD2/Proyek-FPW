@@ -11,7 +11,6 @@ use Maatwebsite\Excel\Facades\Excel;
 class ExcelController extends Controller
 {
     public function getSphreadExcel(){
-        $user = User::all();
         return Excel::download(new UsersExport, 'users.xlsx');
     }
 }

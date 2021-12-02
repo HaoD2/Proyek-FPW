@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginAuth
 {
@@ -14,8 +15,13 @@ class LoginAuth
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next,$roles)
     {
-        return $next($request);
+        $user = Auth::user();
+
+        if($user->level == $roles)
+            return $next($request);
+
+        return redirect('login')->with('error',"kamu gak punya akses");
     }
 }
