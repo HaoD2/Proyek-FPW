@@ -20,7 +20,8 @@ class userController extends Controller
             $user = Auth::user();
             if($user->level == "admin"){
                 $req->session()->regenerate();
-                return view('admin');
+                $user = user::all()->except(Auth::id());;
+                return view('admin',compact('user'));
 
             }else if ($user->level == "user"){
                 $req->session()->regenerate();

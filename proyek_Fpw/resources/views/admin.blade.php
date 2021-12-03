@@ -5,8 +5,31 @@
         <div class="container py-5 text-center">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <h2>Demo section 1</h2>
-                    <p class="text-muted lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">No telp</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($user as $var)
+                          <tr>
+                                <td>{{$var->fname . " " . $var->lname}}</td>
+                                <td>{{$var->email }}</td>
+                                <td>{{$var->notelp}}</td>
+                                @if ($var->status == 1)
+                                <td><button class="btn btn-danger">Ban</button></td>
+                                @else
+                                <td><button class="btn btn-primary">Unban</button></td>
+                                @endif
+
+                          </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
                 </div>
             </div>
         </div>

@@ -35,14 +35,6 @@ Route::get('/login', [userController::class,'doLogin'])->name('login');
 Route::get('/getSphread',[ExcelController::class,'getSphreadExcel'])->name('donwload');
 Route::get('/log',[userController::class,'logout']);
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/admin', function(){
-        return view('admin');
-    });
-    Route::get('/homepage', function(){
-        return view('homepage');
-    })->name('homepage');
-});
-Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['auth_verification:admin']], function () {
     	/*
     		Route Khusus untuk role admin
