@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,7 @@ Route::get('/toRegister', function(){
 Route::get('/register', [userController::class,'doRegister'])->name('register');
 
 Route::get('/login', [userController::class,'doLogin'])->name('login');
-
+Route::get('/ban',[adminController::class,'doBanOrUnban'])->name('BanOrUnban');
 Route::get('/getSphread',[ExcelController::class,'getSphreadExcel'])->name('donwload');
 Route::get('/log',[userController::class,'logout']);
 Route::group(['middleware' => ['auth']], function () {

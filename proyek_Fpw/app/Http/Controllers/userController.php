@@ -7,6 +7,7 @@ use Facade\Ignition\DumpRecorder\Dump;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class userController extends Controller
@@ -24,8 +25,12 @@ class userController extends Controller
                 return view('admin',compact('user'));
 
             }else if ($user->level == "user"){
-                $req->session()->regenerate();
-                return view('homepage');
+                if($user->status == 1){
+                    $req->session()->regenerate();
+                    return view('homepage');
+                }else{
+                    return Redirect::back()->with('msg', 'Akun anda terkena suspend Ban !!');
+                }
             }
         }else{
             return redirect('toLogin');

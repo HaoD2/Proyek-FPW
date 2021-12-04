@@ -11,6 +11,7 @@
 
 </head>
 <body>
+
     <div class="registration-form">
         <form action="{{route('login')}}" method="GET">
             @csrf
@@ -39,6 +40,10 @@
             </div>
 
         </form>
+
+        <script>
+
+        </script>
         {{-- <div class="social-media">
             <h5>Sign up with social media</h5>
             <div class="social-icons">
@@ -51,5 +56,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

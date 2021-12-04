@@ -5,6 +5,8 @@
         <div class="container py-5 text-center">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
+                    <form action="{{ route('BanOrUnban') }}">
+                        @csrf
                     <table class="table">
                         <thead>
                           <tr>
@@ -21,15 +23,15 @@
                                 <td>{{$var->email }}</td>
                                 <td>{{$var->notelp}}</td>
                                 @if ($var->status == 1)
-                                <td><button class="btn btn-danger">Ban</button></td>
+                                <td><button class="btn btn-danger" type="submit" name="BanOrUnban" value="{{$var->email}}">Ban</button></td>
                                 @else
-                                <td><button class="btn btn-primary">Unban</button></td>
+                                <td><button class="btn btn-primary" type="submit" name="BanOrUnban" value="{{$var->email}}">Unban</button></td>
                                 @endif
-
                           </tr>
                           @endforeach
                         </tbody>
                       </table>
+                    </form>
                 </div>
             </div>
         </div>
