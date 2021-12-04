@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class userController extends Controller
 {
@@ -29,7 +31,9 @@ class userController extends Controller
                     $req->session()->regenerate();
                     return view('homepage');
                 }else{
-                    return Redirect::back()->with('msg', 'Akun anda terkena suspend Ban !!');
+                    Auth::logout();
+                    Alert::error('Banned', 'Akun anda terkena suspend Ban !!');
+                    return redirect('toLogin');
                 }
             }
         }else{
