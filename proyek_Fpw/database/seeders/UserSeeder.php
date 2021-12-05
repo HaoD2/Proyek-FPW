@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
                'password'=> Hash::make('admin'),
                'level'=> 'admin',
                'status'=> '1',
+               'isSeller'=>0,
                'saldo' => 0
             ],
             [
@@ -36,6 +37,7 @@ class UserSeeder extends Seeder
                 'password'=> Hash::make('johnganteng'),
                 'level'=> 'user',
                 'status'=> '1',
+                'isSeller'=>1,
                 'saldo' => 0
 
             ],

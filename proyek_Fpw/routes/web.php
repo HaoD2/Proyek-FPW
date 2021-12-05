@@ -24,6 +24,14 @@ Route::get('/toLogin', function(){
     return view('login');
 })->name('toLogin');
 
+Route::get('/tokoku', function(){
+    return view('tokoku');
+})->name('tokoku');
+
+Route::get('/setelan', function(){
+    return view('setelan');
+})->name('setelan');
+
 Route::get('/toRegister', function(){
     return view('register');
 });

@@ -37,7 +37,9 @@ class userController extends Controller
                 }
             }
         }else{
+            Alert::error('Gagal Login', 'Kredensial yang anda masukkan salah');
             return redirect('toLogin');
+
         }
     }
 
@@ -74,6 +76,7 @@ class userController extends Controller
                         "password" => Hash::make($req->password),
                         "level" => $level,
                         "status"=> $status,
+                        "isSeller"=> 0,
                         "saldo"=>$saldo
                     ]
                 );
@@ -88,6 +91,6 @@ class userController extends Controller
     public function logout(Request $request) {
         Session::flush();
         Auth::logout();
-        return view('login');
+        return redirect('/');
     }
 }
