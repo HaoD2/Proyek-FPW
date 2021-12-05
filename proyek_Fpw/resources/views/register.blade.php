@@ -7,9 +7,11 @@
     <title>register form</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="{{ URL::asset('css/style.css'); }} ">
 </head>
 <body>
+
     <div class="registration-form">
         <form action="{{route('register')}}" method="GET">
             <button type="button" class="btn btn-danger" onclick="location.href='{{ url('/') }}'">Kembali</button>
@@ -64,7 +66,7 @@
                 <div class="form-group">
                     <button class="btn btn-block create-account">Buat Akun</button>
                 </div>
-            
+
         </form>
         {{-- <div class="social-media">
             <h5>Sign up with social media</h5>
@@ -78,5 +80,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="assets/js/script.js"></script>
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 </body>
 </html>

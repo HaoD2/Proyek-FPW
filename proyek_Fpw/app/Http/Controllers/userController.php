@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
+
 class userController extends Controller
 {
     public function doLogin(Request $req){
@@ -63,7 +64,8 @@ class userController extends Controller
         $saldo = 0;
         if(count($check_same) > 0)
         {
-            return response()->json("email already exist !");
+            Alert::error('Gagal Register','Email sudah ada!');
+            return back();
         }
         else {
             try {
@@ -76,15 +78,14 @@ class userController extends Controller
                         "password" => Hash::make($req->password),
                         "level" => $level,
                         "status"=> $status,
-                        "isSeller"=> 0,
                         "saldo"=>$saldo
                     ]
                 );
+                Alert::success('Success Title', 'Success Message');
             } catch (\Exception $e) {
-                return response()->json($e->getMessage());
+                Alert::error('Gagal Register',$e->getMessage());
             }
-
-            return back()->with('msg','Register Success!');
+            return redirect("/toRegister");
         }
     }
 

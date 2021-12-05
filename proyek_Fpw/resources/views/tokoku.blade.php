@@ -2,7 +2,11 @@
 
 
 @section('mainContent')
-    @if(Auth::user()->isSeller == 1)
+@php
+    $data = \App\Models\isSeller::where('email', Auth::user()->email)->first();
+@endphp
+
+    @if($data != null)
         <div class="box">
             <h1>Toko saya</h1>
             <div>bum saya seller</div>

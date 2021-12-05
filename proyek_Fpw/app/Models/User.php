@@ -9,7 +9,7 @@ class User extends Authenticable
 {
     use HasFactory;
     protected $table = 'user';
-    protected $fillable = ['fname','lname','email','notelp','password','level','status','isSeller', 'saldo'];
+    protected $fillable = ['fname','lname','email','notelp','password','level','status', 'saldo'];
     protected $primaryKey   = "email";
     public $incrementing    = false;
     public $timestamps      = false;

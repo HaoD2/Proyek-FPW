@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class User extends Migration
+class IsSeller extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class User extends Migration
      */
     public function up()
     {
-        Schema::create('user', function (Blueprint $table) {
-            $table->string('fname');
-            $table->string('lname');
-            $table->string('email')->primary();
-            $table->string('notelp');
-            $table->string('password');
-            $table->string('level');
+        Schema::create('isSeller', function (Blueprint $table) {
+            $table->string('email')->references('email')->on('user')->onDelete('cascade');
             $table->integer('status');
-            $table->integer('saldo');
             $table->timestamps();
         });
     }
@@ -33,6 +27,6 @@ class User extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        //
     }
 }
