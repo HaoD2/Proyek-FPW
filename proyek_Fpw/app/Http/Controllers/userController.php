@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\request_saldo;
 use App\Models\User;
 use Facade\Ignition\DumpRecorder\Dump;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -40,8 +42,70 @@ class userController extends Controller
         }else{
             Alert::error('Gagal Login', 'Kredensial yang anda masukkan salah');
             return redirect('toLogin');
-
         }
+    }
+
+    public function isiSaldo(Request $req)
+    {
+        $valid=[
+            "jumlah"=> ["required"],
+        ];
+        $msg = [
+            "input tidak boleh kosong"
+        ];
+        $this->validate($req,$valid,$msg);
+        $user = Auth::user();
+        if($user->level == "admin"){
+            $req->session()->regenerate();
+            $user = user::all()->except(Auth::id());;
+            return view('admin',compact('user'));
+        }else if ($user->level == "user"){
+            if($user->status == 1){
+                $namauser = $user->fname . " " . $user->lname;
+                request_saldo::create(
+                    [
+                        "nama_user" => $namauser,
+                        "email_user" => $user->email,
+                        "jumlah"=>$req->input('jumlah')
+                    ]
+                );
+                Alert::success('Success Topup', 'Menunggu konfirmasi admin, hubungi admin jika saldo tidak bertambah selama 1x24 jam');
+                return view('topup');
+            }else{
+                Auth::logout();
+                Alert::error('Banned', 'Akun anda terkena suspend Ban !!');
+                return redirect('toLogin');
+            }
+        }
+
+    }
+
+    public function acceptreq(Request $req)
+    {
+        $reqsaldo=request_saldo::all();
+        $id=$req->input('idreq');
+        foreach($reqsaldo as $reqsaldo)
+        {
+            if($reqsaldo->id==$id)
+            {
+                $emailreq=$reqsaldo->email_user;
+                $jumlah=$reqsaldo->jumlah;
+            }
+        }
+        request_saldo::where('id',$id)->delete();
+        User::where('email',$emailreq)->update([
+            'saldo'=>new Expression('saldo + '.$jumlah),
+        ]);
+
+        return view('req_saldo_admin');
+    }
+
+    public function rejectreq(Request $req)
+    {
+        $reqsaldo=request_saldo::all();
+        $id=$req->input('idreq');
+        request_saldo::where('id',$id)->delete();
+        return view('req_saldo_admin');
     }
 
     public function doRegister(Request $req){

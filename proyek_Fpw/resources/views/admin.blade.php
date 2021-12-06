@@ -2,6 +2,10 @@
 
 @section('mainSection')
     <section class="py-5 section-1">
+        <h2>List User</h2>
+        @php
+            $user=DB::table('user')->where('level','=','user')->get();
+        @endphp
         <div class="container py-5 text-center">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
@@ -44,6 +48,8 @@
 
 @section('customStyle')
     <style>
-
+        h2{
+            text-align: center;
+        }
     </style>
 @endsection

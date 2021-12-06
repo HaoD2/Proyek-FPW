@@ -2,45 +2,88 @@
 
 
 @section('mainContent')
-
 <div class="box">
-    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
-        <div class="position-sticky">
-          <div class="list-group list-group-flush mt-1">
-            <a href="/goto_profile" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-              <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Profil saya</span>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Keamanan</span>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Riwayat Pembelian saya</span>
-            </a>
-
-          </div>
-        </div>
-      </nav>
-
+<form action="/isisaldo" method="GET">
+    <label for="via">Top Up:</label>
+    <select id="via" name="via">
+        <option value="GOPAY">GoPay</option>
+        <option value="BCA">BCA</option>
+        <option value="OVO">Ovo</option>
+    </select>
+    <br>
+    <br>
+    <label for="jumlah">Jumlah :</label>
+    <input type="number" name="jumlah" placeholder="Jumlah...">
+    <input type="submit" value="Submit" class="submit">
+</form>
 </div>
-
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script src="assets/js/script.js"></script>
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 @endsection
 
 
 @section('customStyle')
 <style>
-.box{
-    width:100vw;
-    height:500px;
-    background-color: white;
-    padding: 10px;
-    border-bottom-left-radius: 75px;
-    border-bottom-right-radius: 75px;
+input[type=number], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 
+.submit{
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #45a049;
 }
 
 
+.box{
+    width:100vw;
+    height:400px;
+    background-color: white;
+    padding: 40px;
+    border-bottom-left-radius: 75px;
+    border-bottom-right-radius: 75px;
+}
 
+button{
+    border: 1px solid black;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+h3{
+    text-align: center;
+}
+
+.container1{
+    margin:0 auto;
+    background-color: whitesmoke;
+}
+
+p{
+    font-size: 16px;
+    border-bottom: 1px solid lightgray;
+}
 .card{
     width:250px;
     height:300px;

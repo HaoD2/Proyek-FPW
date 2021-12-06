@@ -28,6 +28,14 @@ Route::get('/tokoku', function(){
     return view('tokoku');
 })->name('tokoku');
 
+Route::get('/topup', function(){
+    return view('topup');
+})->name('topup');
+
+Route::get('/goto_profile', function(){
+    return view('profile');
+})->name('goto_profile');
+
 Route::get('/setelan', function(){
     return view('setelan');
 })->name('setelan');
@@ -36,10 +44,22 @@ Route::get('/toRegister', function(){
     return view('register');
 });
 
+Route::get('/gotoadmin_home', function(){
+    return view('admin');
+});
+
+Route::get('/gotoadmin_req', function(){
+    return view('req_saldo_admin');
+});
+
 
 Route::get('/register', [userController::class,'doRegister'])->name('register');
 
 Route::get('/login', [userController::class,'doLogin'])->name('login');
+Route::get('/acceptreq', [userController::class,'acceptreq'])->name('acceptreq');
+Route::get('/rejectreq', [userController::class,'rejectreq'])->name('rejectreq');
+
+Route::get('/isisaldo', [userController::class,'isiSaldo'])->name('isisaldo');
 Route::get('/ban',[adminController::class,'doBanOrUnban'])->name('BanOrUnban');
 Route::get('/getSphread',[ExcelController::class,'getSphreadExcel'])->name('donwload');
 Route::get('/log',[userController::class,'logout']);
