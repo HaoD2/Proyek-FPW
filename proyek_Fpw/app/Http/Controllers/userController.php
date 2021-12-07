@@ -153,6 +153,25 @@ class userController extends Controller
         }
     }
 
+    public function editprofil(Request $req){
+        // $valid=[
+        //     "fname"=> ["required"],
+        //     "lname"=> ["required"],
+        //     "email"=> ["required"],
+        //     "telnum"=>["required","digits_between:10,12"]
+        // ];
+        // $msg = [
+        //     "telnum.digits_between:10,12"=>"jumlah angka harus diantara 10-12"
+        // ];
+        // $this->validate($req,$valid,$msg);
+        $temp_data = User::find(Auth::user()->email);
+        $temp_data->fname = $req->fname;
+        $temp_data->lname = $req ->lname;
+        $temp_data->notelp = $req ->telnum;
+        $temp_data->save();
+        return redirect('/goto_profile');
+    }
+
     public function logout(Request $request) {
         Session::flush();
         Auth::logout();

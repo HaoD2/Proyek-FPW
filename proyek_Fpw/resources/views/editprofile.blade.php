@@ -6,14 +6,8 @@
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white" style="float:left">
         <div class="position-sticky">
           <div class="list-group list-group-flush mt-1">
-            <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-              <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Profil saya</span>
-            </a>
-            <a href="{{route('goto_keamanan')}}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Keamanan</span>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Riwayat Pembelian saya</span>
+            <a href="{{route('goto_profile')}}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+              <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Back to Profile</span>
             </a>
           </div>
         </div>
@@ -21,11 +15,16 @@
     <div class="container1">
         <h3><img src="dummy.png" alt="Avatar" class="avatar"><br>{{Auth::user()->fname}}&nbsp;{{Auth::user()->lname}}</h3>
         <br>
-        <pre><p> <strong>Full Name :</strong>                 {{Auth::user()->fname." ".Auth::user()->lname}}</p></pre>
-        <pre><p> <strong>Email :</strong>                     {{Auth::user()->email}}</p></pre>
-        <pre><p> <strong>Nomor Telepon :</strong>             {{Auth::user()->notelp}}</p></pre>
-        <form action="/topup" method="get"><pre><p> <strong>Saldo :</strong>                     {{Auth::user()->saldo}}   <button>Top Up</button></p></pre></form>
+        <form action="{{route('doEditprofil')}}" method="GET" >
+            @csrf
+        <pre><p> <strong>First Name :</strong> <input  name="fname" type="text" value=" {{Auth::user()->fname}}"></p></pre>
+        <pre><p> <strong>Last Name :</strong> <input  name="lname" type="text" value=" {{Auth::user()->lname}}"></p></pre>
+        <pre><p> <strong>Email :</strong><input name="email" type="text" value=" {{Auth::user()->email}}" disabled></p></pre>
+        <pre><p> <strong>Nomor Telepon :</strong><input name="telnum" type="text" value=" {{Auth::user()->notelp}}"></p></pre>
+        <pre><p><button>Save</button></p></pre>
+        </form>
     </div>
+
 </div>
 
 @endsection
@@ -169,3 +168,4 @@ body {
 }
 </style>
 @endsection
+

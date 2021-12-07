@@ -36,6 +36,14 @@ Route::get('/goto_profile', function(){
     return view('profile');
 })->name('goto_profile');
 
+Route::get('/goto_keamanan', function(){
+    return view('keamanan');
+})->name('goto_keamanan');
+
+Route::get('/goto_editprof', function(){
+    return view('editprofile');
+})->name('goto_editprof');
+
 Route::get('/setelan', function(){
     return view('setelan');
 })->name('setelan');
@@ -52,7 +60,7 @@ Route::get('/gotoadmin_req', function(){
     return view('req_saldo_admin');
 });
 
-
+Route::get('/action_editprofil', [userController::class,'editprofil'])->name('doEditprofil');
 Route::get('/register', [userController::class,'doRegister'])->name('register');
 
 Route::get('/login', [userController::class,'doLogin'])->name('login');
