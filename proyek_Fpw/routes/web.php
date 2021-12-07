@@ -43,6 +43,9 @@ Route::get('/goto_keamanan', function(){
 Route::get('/goto_editprof', function(){
     return view('editprofile');
 })->name('goto_editprof');
+Route::get('/goto_gantipass', function(){
+    return view('gantipassword');
+})->name('goto_gantipass');
 
 Route::get('/setelan', function(){
     return view('setelan');
@@ -61,6 +64,7 @@ Route::get('/gotoadmin_req', function(){
 });
 
 Route::get('/action_editprofil', [userController::class,'editprofil'])->name('doEditprofil');
+Route::get('/action_gantipass', [userController::class,'gantipass'])->name('doGantipass');
 Route::get('/register', [userController::class,'doRegister'])->name('register');
 
 Route::get('/login', [userController::class,'doLogin'])->name('login');

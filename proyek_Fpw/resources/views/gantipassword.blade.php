@@ -7,29 +7,22 @@
         <div class="position-sticky">
           <div class="list-group list-group-flush mt-1">
             <a href="{{route('goto_profile')}}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-              <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Profil saya</span>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Keamanan</span>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Riwayat Pembelian saya</span>
+              <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Back to Profile</span>
             </a>
           </div>
         </div>
     </nav>
     <div class="container1">
-        <div class="position-sticky">
-            <div class="list-group list-group-flush mt-1">
-              <a href="{{route('goto_editprof')}}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Edit profil</span>
-              </a>
-              <a href="{{route('goto_gantipass')}}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                  <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Ganti Password</span>
-              </a>
-            </div>
-          </div>
+        <h3><img src="dummy.png" alt="Avatar" class="avatar"><br>{{Auth::user()->fname}}&nbsp;{{Auth::user()->lname}}</h3>
+        <br>
+        <form action="{{route('doGantipass')}}" method="GET" >
+            @csrf
+        <pre><p> <strong>Password :</strong> <input  name="password" type="password" ></p></pre>
+        <pre><p> <strong>Konfirmasi Password :</strong><input  name="password_confirmation" type="password"></p></pre>
+        <pre><p><button>Save</button></p></pre>
+        </form>
     </div>
+
 </div>
 
 @endsection
@@ -173,3 +166,4 @@ body {
 }
 </style>
 @endsection
+
