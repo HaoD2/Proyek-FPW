@@ -157,21 +157,22 @@ class userController extends Controller
     public function verification(Request $req)
     {
         $data = $req->all();
-        return response()->json(['success'=>'Ajax request submitted successfully']);
-        // $image = new VerificationModel;
+        if($data['ktp64'] != "" && $data['selfie64'] != "")
+        {
+            VerificationModel::create(
+                [
+                    "email"=>Auth::user()->email,
+                    "foto" => $data['ktp64'],
+                    "selfie" =>$data['selfie64']
+                ]
+            );
+            return response()->json(['success'=>'Sukses Verifikasi, silahkan tunggu respon admin!']);
+        }
+        else{
+            return response()->json(['error'=>'Tidak boleh ada data yang kosong!']);
+        }
 
-        // if ($req->file('file')) {
-        //     $imagePath = $req->file('file');
-        //     $imageName = $imagePath->getClientOriginalName();
 
-        //     $path = $req->file('file')->storeAs('uploads', $imageName, 'public');
-        // }
-
-        // $image->name = $imageName;
-        // $image->path = '/storage/'.$path;
-        // $image->save();
-
-        // return response()->json('Image uploaded successfully');
     }
 
     public function editprofil(Request $req){

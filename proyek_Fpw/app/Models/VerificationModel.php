@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class VerificationModel extends Model
 {
     use HasFactory;
-    protected $table = 'user';
-    protected $fillable = [];
+    protected $table = 'seller_verification';
+    protected $fillable = ['email', 'foto', 'selfie'];
     protected $primaryKey   = "email";
     public $incrementing    = false;
-    public $timestamps      = false;
+    public $timestamps      = true;
 }

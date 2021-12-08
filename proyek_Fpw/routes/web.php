@@ -32,8 +32,8 @@ Route::get('/verifikasi', function(){
     return view('sellerverifikasi');
 })->name('verifikasi');
 
-
-Route::post('/senddata', [userController::class, 'verification']);
+Route::view('/senddata', 'sellerverifikasi');
+Route::post('/senddata', [userController::class, 'verification'])->name('verify');
 
 Route::get('/topup', function(){
     return view('topup');

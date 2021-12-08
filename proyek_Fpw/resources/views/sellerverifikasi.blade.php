@@ -15,22 +15,24 @@
 
         </div>
     @else
-
+    {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
         <div class="box">
             @php
                 RealRashid\SweetAlert\Facades\Alert::info('Verifikasi', 'Tolong masukkan foto KTP beserta selfie bersama KTP untuk melanjutkan verifikasi');
             @endphp
             <div class="ml-5">
                 <div style="margin-left: 15px">
+                    <meta name="csrf-token" content="{{ csrf_token() }}">
                     <form>
-
                         <h1>Foto KTP</h1>
                         <input type="file" name="" id="ktp" class="btn btn-primary" onchange="encodeKTPFileAsURL(this)"><br><br>
                         <h1>Foto selfie dengan KTP</h1>
                         <input type="file" name="" id="selfie" class="btn btn-primary" onchange="encodeSelfieFileAsURL(this)"> <br><br>
 
-                        <button id="submitVerif" class="btn btn-success submitVerif">Submit</button>
+                        <button id="submitVerif" type="button" class="btn btn-success submitVerif">Submit</button>
                     </form>
+
+
 
                     <script>
 
@@ -61,30 +63,45 @@
                                 reader.readAsDataURL(file);
                                 console.log(selfie);
                             }
+
                         $(document).ready(function() {
-
-
                             $("#submitVerif").click(function(){
-                                $.ajax({
-                                    url: "/senddata",
-                                    type:"POST",
-                                    data:{
-                                        ktp64:ktp,
-                                        selfie64:selfie,
-                                        _token: _token
-                                    },
-                                    success:function(response){
-                                        console.log(response);
-                                        if(response) {
-                                            console.log(response);
-                                        }
-                                    },
-                                    error: function(error) {
-                                        console.log(error);
+
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                     }
                                 });
+
+                                $.ajax({
+                                    url: "{{ route('verify') }}",
+                                    type: "POST",
+                                    data: {
+                                        ktp64: ktp,
+                                        selfie64:selfie
+                                    },
+                                    success:function(data){
+                                        Swal.fire(
+                                            'Sukses!',
+                                            data,
+                                            'success'
+                                        )
+                                    },
+                                    error:function(data)
+                                    {
+                                        Swal.fire(
+                                            'Gagal!',
+                                            data,
+                                            'error'
+                                        );
+                                    }
+                                })
+
                             });
+
                         });
+
+
                     </script>
                 </div>
             </div>
