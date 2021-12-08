@@ -6,7 +6,7 @@
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white" style="float:left">
         <div class="position-sticky">
           <div class="list-group list-group-flush mt-1">
-            <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple active" aria-current="true">
               <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Profil saya</span>
             </a>
             <a href="{{route('goto_keamanan')}}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
@@ -24,7 +24,7 @@
         <pre><p> <strong>Full Name :</strong>                 {{Auth::user()->fname." ".Auth::user()->lname}}</p></pre>
         <pre><p> <strong>Email :</strong>                     {{Auth::user()->email}}</p></pre>
         <pre><p> <strong>Nomor Telepon :</strong>             {{Auth::user()->notelp}}</p></pre>
-        <form action="/topup" method="get"><pre><p> <strong>Saldo :</strong>                     {{Auth::user()->saldo}}   <button>Top Up</button></p></pre></form>
+        <form action="/topup" method="get"><pre><p> <strong>Saldo :</strong>                     {{"Rp.".Auth::user()->saldo}}   <button>Top Up</button></p></pre></form>
     </div>
 </div>
 

@@ -8,14 +8,17 @@
 
     @if($data != null)
         <div class="box">
-            <h1>Toko saya</h1>
-            <div>bum saya seller</div>
+            <div style="margin-left: 15px">
+                <h1><img src="{{URL::asset('image/shop.png'); }}" alt="" >Toko saya</h1>
+
+            </div>
+
         </div>
     @else
         <div class="box2">
             <div class="ml-5">
                 <div class="mt-5">Akun anda belum diverifikasi menjadi seller</div>
-                <button class="btn btn-success">Verifikasi akun saya</button>
+                <button class="btn btn-success" onclick="location.href='{{ url('verifikasi') }}'">Verifikasi akun saya</button>
             </div>
         </div>
     @endif

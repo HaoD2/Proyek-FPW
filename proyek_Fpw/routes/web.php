@@ -28,6 +28,13 @@ Route::get('/tokoku', function(){
     return view('tokoku');
 })->name('tokoku');
 
+Route::get('/verifikasi', function(){
+    return view('sellerverifikasi');
+})->name('verifikasi');
+
+
+Route::post('/senddata', [userController::class, 'verification']);
+
 Route::get('/topup', function(){
     return view('topup');
 })->name('topup');

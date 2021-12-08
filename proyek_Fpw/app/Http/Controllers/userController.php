@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\request_saldo;
 use App\Models\User;
+use App\Models\VerificationModel;
 use Facade\Ignition\DumpRecorder\Dump;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Http\Request;
@@ -142,16 +143,35 @@ class userController extends Controller
                         "password" => Hash::make($req->password),
                         "level" => $level,
                         "status"=> $status,
-                        "isSeller"=>0,
                         "saldo"=>$saldo
                     ]
                 );
-                Alert::success('Success Title', 'Success Message');
+                Alert::success('Success Register', 'Silahkan masuk ke halaman login');
             } catch (\Exception $e) {
                 Alert::error('Gagal Register',$e->getMessage());
             }
             return redirect("/toRegister");
         }
+    }
+
+    public function verification(Request $req)
+    {
+        $data = $req->all();
+        return response()->json(['success'=>'Ajax request submitted successfully']);
+        // $image = new VerificationModel;
+
+        // if ($req->file('file')) {
+        //     $imagePath = $req->file('file');
+        //     $imageName = $imagePath->getClientOriginalName();
+
+        //     $path = $req->file('file')->storeAs('uploads', $imageName, 'public');
+        // }
+
+        // $image->name = $imageName;
+        // $image->path = '/storage/'.$path;
+        // $image->save();
+
+        // return response()->json('Image uploaded successfully');
     }
 
     public function editprofil(Request $req){
