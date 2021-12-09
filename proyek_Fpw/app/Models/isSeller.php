@@ -9,7 +9,7 @@ class isSeller extends Model
 {
     use HasFactory;
     protected $table = 'isSeller';
-    protected $fillable = ['email'];
+    protected $fillable = ['email', 'status'];
     public $incrementing    = false;
     public $timestamps      = true;
 }

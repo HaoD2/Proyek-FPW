@@ -28,12 +28,21 @@ Route::get('/tokoku', function(){
     return view('tokoku');
 })->name('tokoku');
 
+Route::get('/verifyseller', function(){
+    return view('adminconfver');
+})->name('verifyseller');
+
 Route::get('/verifikasi', function(){
     return view('sellerverifikasi');
 })->name('verifikasi');
 
+Route::get('/adminconfirmver', [adminController::class, 'doCheckVerifySeller'])->name('adminconfirmver');
+
 Route::view('/senddata', 'sellerverifikasi');
 Route::post('/senddata', [userController::class, 'verification'])->name('verify');
+
+Route::view('/verifyAdmin', 'adminconfver');
+Route::post('/verifyAdmin', [adminController::class, 'doVerify'])->name('verifyAdmin');
 
 Route::get('/topup', function(){
     return view('topup');
@@ -64,6 +73,10 @@ Route::get('/toRegister', function(){
 
 Route::get('/gotoadmin_home', function(){
     return view('admin');
+});
+
+Route::get('/gotoadmin_verify', function(){
+    return view('adminverif');
 });
 
 Route::get('/gotoadmin_req', function(){

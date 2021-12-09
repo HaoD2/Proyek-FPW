@@ -86,14 +86,6 @@
                                             data,
                                             'success'
                                         )
-                                    },
-                                    error:function(data)
-                                    {
-                                        Swal.fire(
-                                            'Gagal!',
-                                            data,
-                                            'error'
-                                        );
                                     }
                                 })
 
