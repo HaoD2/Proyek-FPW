@@ -2,12 +2,13 @@
 
 @section('mainContent')
 <div class="box">
-    <div class="container">
-        <a href="#" class="previous round">&#8249;</a>
-        <a href="#" class="next round">&#8250;</a>
+    <div class="w3-content w3-display-container">
+        <img class="mySlides" src="{{URL::asset('discound1.png');}}" style="width:100%">
+        <img class="mySlides" src="{{URL::asset('discound2.png');}}" style="width:100%">
+        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
     </div>
 </div>
-
 <div class="main">
     <div class="bottomline"><h2>Featured Item</h2></div>
     <div class="card"></div>
@@ -15,6 +16,41 @@
     <div class="card"></div>
     <div class="card"></div>
 </div>
+
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+    carousel();
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = x.length
+        }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex-1].style.display = "block";
+    }
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > x.length) {slideIndex = 1}
+        x[slideIndex-1].style.display = "block";
+        setTimeout(carousel, 2000);
+    }
+</script>
 @endsection
 
 @section('secondContent')
@@ -23,6 +59,14 @@
 
 @section('customStyle')
 <style>
+.mySlides{
+    margin-top:30px;
+    border-radius: 10px;
+    background-color: teal;
+    height:25vw;
+    padding: 20px;
+}
+
 .box{
     width:100vw;
     height:200px;
@@ -48,17 +92,9 @@
     margin-top:200px;
     height: auto;
 }
+
 h2{
     border-bottom:1px solid gray;
-}
-
-.container {
-    margin-top:30px;
-    border-radius: 10px;
-    background-color:teal;
-    width:100%;
-    height:20vw;
-    padding: 20px;
 }
 
 a {

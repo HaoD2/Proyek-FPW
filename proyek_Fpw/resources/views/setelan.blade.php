@@ -39,8 +39,6 @@
 
 }
 
-
-
 .card{
     width:250px;
     height:300px;

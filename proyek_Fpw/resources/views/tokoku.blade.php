@@ -1,19 +1,53 @@
 @extends('template.homepage.main')
-
-
 @section('mainContent')
-@php
-    $data = \App\Models\isSeller::where('email', Auth::user()->email)->first();
-@endphp
-
+<script>
+    function openLink(evt, animName) {
+      var i, x, tablinks;
+      x = document.getElementsByClassName("shop");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+      }
+      document.getElementById(animName).style.display = "block";
+      evt.currentTarget.className += " w3-red";
+    }
+</script>
+    @php
+        $data = \App\Models\isSeller::where('email', Auth::user()->email)->first();
+        $kategori=DB::table('kategori')->get();
+    @endphp
     @if($data != null)
-        <div class="box">
-            <div style="margin-left: 15px">
-                <h1><img src="{{URL::asset('image/shop.png'); }}" alt="" >Toko saya</h1>
+    <div class="w3-sidebar w3-bar-block w3-white" style="width:130px;">
+        <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Input')">Input barang</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Lihat')">Lihat barang</button>
+    </div>
+    <div style="margin-left:130px">
+        <div id="Input" class="w3-container shop w3-animate-opacity" style="display:none">
+            <div class="containerbox">
+                <h3><img src="{{URL::asset("image/shop.png");}}" style="width:70px; height:50px;">&nbsp;Input Barang</h3>
+                <br>
+                <form action="/action_page.php">
+                    <input type="text"  name="nama_barang" placeholder="Nama Barang"><br>
+                    <textarea rows="4" cols="145" name="deskripsi" placeholder="Deskripsi barang"></textarea>
+                    <input type="number" name="harga" placeholder="Harga"><br>
+                    <select name="kategori">
+                        @foreach ($kategori as $kategori)
+                            <option value="{{$kategori->nama_kategori}}">{{$kategori->nama_kategori}}</option>
+                        @endforeach
+                    </select>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        <div id="Lihat" class="w3-container city w3-animate-opacity" style="display:none">
+            <div class="containerbox">
 
             </div>
-
         </div>
+    </div>
     @else
         <div class="box2">
             <div class="ml-5">
@@ -22,15 +56,58 @@
             </div>
         </div>
     @endif
-
 @endsection
-
-
 @section('customStyle')
 <style>
+
+input[type=text], select {
+  width: 99%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea{
+  width: 99%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=number], select {
+  width: 99%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 99%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
 .box{
     width:100vw;
-    height:400px;
+    height:0px;
     background-color: white;
     padding: 10px;
     border-bottom-left-radius: 75px;
@@ -62,8 +139,15 @@
     margin-top:200px;
     height: auto;
 }
+
 h2{
     border-bottom:1px solid gray;
+}
+
+.containerbox {
+  width:80%;
+  border-radius: 5px;
+  padding: 30px;
 }
 
 .container {
@@ -75,7 +159,7 @@ h2{
     padding: 20px;
 }
 
-a {
+a{
   text-decoration: none;
   display: inline-block;
   padding: 8px 16px;

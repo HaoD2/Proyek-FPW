@@ -29,7 +29,6 @@ class adminController extends Controller
     public function doCheckVerifySeller(Request $req)
     {
         $data = $req->checkBtn;
-
         return view('adminconfver', ['data' => $data]);
     }
 
@@ -45,7 +44,6 @@ class adminController extends Controller
                 ]
             );
             return response()->json(['success'=>'Sukses Verifikasi, silahkan tunggu respon admin!']);
-
         }
         return response()->json(['success'=>'Sukses Verifikasi, silahkan tunggu respon admin!']);
 
