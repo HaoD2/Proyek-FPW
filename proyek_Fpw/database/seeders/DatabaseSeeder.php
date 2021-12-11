@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Kategori;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +15,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            UserSeeder::class
+            UserSeeder::class,
+            BarangSeeder::class,
+            isSellerSeeder::class,
+            KategoriSeeder::class
+
         ]);
 
     }

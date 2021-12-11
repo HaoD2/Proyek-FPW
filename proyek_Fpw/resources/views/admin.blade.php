@@ -9,6 +9,7 @@
         <div class="container py-5 text-center">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
+                    <a href="{{ route('donwload') }}"><button class="btn btn-primary float-right m-3">Convert To Excel</button></a>
                     <form action="{{ route('BanOrUnban') }}">
                         @csrf
                     <table class="table">

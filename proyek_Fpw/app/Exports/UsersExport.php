@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -14,7 +15,7 @@ class UsersExport implements FromCollection, WithHeadings
     public function collection()
     {
 
-        return User::all('fname','lname','email','notelp','password');
+        return User::all('fname','lname','email','notelp')->except(Auth::id());
     }
     public function headings(): array
     {
@@ -22,8 +23,7 @@ class UsersExport implements FromCollection, WithHeadings
             'First Name',
             'Last Name',
             'email',
-            'notelp',
-            'password',
+            'notelp'
         ];
     }
 
