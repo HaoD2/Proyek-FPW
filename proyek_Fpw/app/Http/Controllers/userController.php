@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\barangmodel;
 use App\Models\request_saldo;
 use App\Models\User;
 use App\Models\VerificationModel;
@@ -72,6 +73,46 @@ class userController extends Controller
                 );
                 Alert::success('Success Topup', 'Menunggu konfirmasi admin, hubungi admin jika saldo tidak bertambah selama 1x24 jam');
                 return view('topup');
+            }else{
+                Auth::logout();
+                Alert::error('Banned', 'Akun anda terkena suspend Ban !!');
+                return redirect('toLogin');
+            }
+        }
+
+    }
+
+    public function inputbarang(Request $req)
+    {
+        $valid=[
+            "nama_barang"=> ["required"],
+            "deskripsi"=>["required"],
+            "harga"=>["required"]
+        ];
+        $msg = [
+            "input tidak boleh kosong"
+        ];
+        $this->validate($req,$valid,$msg);
+
+        $user = Auth::user();
+        if($user->level == "admin"){
+            $req->session()->regenerate();
+            $user = user::all()->except(Auth::id());;
+            return view('admin',compact('user'));
+        }else if ($user->level == "user"){
+            if($user->status == 1){
+                $useremail = $user->email;
+                barangmodel::create(
+                    [
+                        "nama_barang" => $req->input('nama_barang'),
+                        "kategori_barang"=>$req->input('kategori'),
+                        "deskripsi"=>$req->input('deskripsi'),
+                        "harga"=>$req->input('harga'),
+                        "email_penjual" => $user->email
+                    ]
+                );
+                Alert::success('Success menginput barang');
+                return view('tokoku');
             }else{
                 Auth::logout();
                 Alert::error('Banned', 'Akun anda terkena suspend Ban !!');

@@ -92,6 +92,9 @@ Route::get('/acceptreq', [userController::class,'acceptreq'])->name('acceptreq')
 Route::get('/rejectreq', [userController::class,'rejectreq'])->name('rejectreq');
 
 Route::get('/isisaldo', [userController::class,'isiSaldo'])->name('isisaldo');
+
+Route::get('/inputbarang', [userController::class,'inputbarang'])->name('inputbarang');
+
 Route::get('/ban',[adminController::class,'doBanOrUnban'])->name('BanOrUnban');
 Route::get('/getSphread',[ExcelController::class,'getSphreadExcel'])->name('donwload');
 Route::get('/log',[userController::class,'logout']);

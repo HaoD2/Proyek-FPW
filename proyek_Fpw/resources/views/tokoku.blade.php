@@ -1,20 +1,7 @@
 @extends('template.homepage.main')
 @section('mainContent')
-<script>
-    function openLink(evt, animName) {
-      var i, x, tablinks;
-      x = document.getElementsByClassName("shop");
-      for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-      }
-      tablinks = document.getElementsByClassName("tablink");
-      for (i = 0; i < x.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
-      }
-      document.getElementById(animName).style.display = "block";
-      evt.currentTarget.className += " w3-red";
-    }
-</script>
+<script src="assets/js/script.js"></script>
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
     @php
         $data = \App\Models\isSeller::where('email', Auth::user()->email)->first();
         $kategori=DB::table('kategori')->get();
@@ -22,14 +9,14 @@
     @if($data != null)
     <div class="w3-sidebar w3-bar-block w3-white" style="width:130px;">
         <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Input')">Input barang</button>
-        <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Lihat')">Lihat barang</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Left')">Lihat barang</button>
     </div>
     <div style="margin-left:130px">
         <div id="Input" class="w3-container shop w3-animate-opacity" style="display:none">
             <div class="containerbox">
                 <h3><img src="{{URL::asset("image/shop.png");}}" style="width:70px; height:50px;">&nbsp;Input Barang</h3>
                 <br>
-                <form action="/action_page.php">
+                <form action="/inputbarang" method="get">
                     <input type="text"  name="nama_barang" placeholder="Nama Barang"><br>
                     <textarea rows="4" cols="145" name="deskripsi" placeholder="Deskripsi barang"></textarea>
                     <input type="number" name="harga" placeholder="Harga"><br>
@@ -42,9 +29,30 @@
                 </form>
             </div>
         </div>
-        <div id="Lihat" class="w3-container city w3-animate-opacity" style="display:none">
+        <div id="Left" class="w3-container shop w3-animate-left" style="display:none">
+            <h3 style="margin: 20px;"><img src="{{URL::asset("image/shop.png");}}" style="width:70px; height:50px;">&nbsp;Lihat Barang</h3>
             <div class="containerbox">
-
+                @php
+                    $barang=DB::table('barang')->get();
+                @endphp
+                <table class="table1">
+                    <tr>
+                        <th>Nama Barang</th>
+                        <th>Kategori</th>
+                        <th>Deskripsi</th>
+                        <th>Harga</th>
+                    </tr>
+                    @foreach ($barang as $barang)
+                        @if ($barang->email_penjual==Auth::user()->email)
+                        <tr>
+                            <td>{{$barang->nama_barang}}</td>
+                            <td>{{$barang->kategori_barang}}</td>
+                            <td>{{$barang->deskripsi}}</td>
+                            <td>{{$barang->harga}}</td>
+                        </tr>
+                        @endif
+                    @endforeach
+                </table>
             </div>
         </div>
     </div>
@@ -56,9 +64,51 @@
             </div>
         </div>
     @endif
+<script>
+    function openLink(evt, animName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("shop");
+        for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+        }
+        document.getElementById(animName).style.display = "block";
+        evt.currentTarget.className += " w3-red";
+    }
+</script>
 @endsection
 @section('customStyle')
 <style>
+.table1 {
+    font-family: sans-serif;
+    color: #444;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #f2f5f7;
+}
+
+.table1 tr th{
+    background: #35A9DB;
+    color: #fff;
+    font-weight: normal;
+}
+
+.table1, th, td {
+    padding: 8px 30px;
+    text-align: center;
+}
+
+.table1 tr:hover {
+    background-color: #f5f5f5;
+}
+
+.table1 tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
 
 input[type=text], select {
   width: 99%;
