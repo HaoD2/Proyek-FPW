@@ -24,6 +24,7 @@ class UsersExport implements FromCollection, WithHeadings
             'Last Name',
             'email',
             'notelp'
+            
         ];
     }
 
