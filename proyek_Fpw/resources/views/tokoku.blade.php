@@ -1,31 +1,34 @@
 @extends('template.homepage.main')
 @section('mainContent')
 <script src="assets/js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
     @php
         $data = \App\Models\isSeller::where('email', Auth::user()->email)->first();
         $kategori=DB::table('kategori')->get();
     @endphp
     @if($data != null)
-    <div class="w3-sidebar w3-bar-block w3-white" style="width:130px;">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <div class="w3-sidebar w3-bar-block w3-white" style="width:130px; height: 100%">
         <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Input')">Input barang</button>
         <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Left')">Lihat barang</button>
     </div>
-    <div style="margin-left:130px">
+    <div style="margin-left:130px; background-color: #fff;height: 100%;">
         <div id="Input" class="w3-container shop w3-animate-opacity" style="display:none">
             <div class="containerbox">
                 <h3><img src="{{URL::asset("image/shop.png");}}" style="width:70px; height:50px;">&nbsp;Input Barang</h3>
                 <br>
                 <form action="/inputbarang" method="get">
-                    <input type="text"  name="nama_barang" placeholder="Nama Barang"><br>
-                    <textarea rows="4" cols="145" name="deskripsi" placeholder="Deskripsi barang"></textarea>
-                    <input type="number" name="harga" placeholder="Harga"><br>
-                    <select name="kategori">
+                    <input type="text"  name="nama_barang" placeholder="Nama Barang" id="namabarang"><br>
+                    <textarea rows="4" cols="145" name="deskripsi" placeholder="Deskripsi barang" id="deskripsi"></textarea>
+                    <input type="number" name="harga" placeholder="Harga" id="harga"><br>
+                    <select name="kategori" id="kategori">
                         @foreach ($kategori as $kategori)
-                            <option value="{{$kategori->nama_kategori}}">{{$kategori->nama_kategori}}</option>
+                            <option value="{{$kategori->id}}">{{$kategori->nama_kategori}}</option>
                         @endforeach
                     </select>
-                    <input type="submit" value="Submit">
+                    <button type="button"  value="Submit" id="submitBtn" class="btn btn-success" style="width: 100%; height: 50px">Submit</button>
                 </form>
             </div>
         </div>
@@ -78,7 +81,52 @@
         document.getElementById(animName).style.display = "block";
         evt.currentTarget.className += " w3-red";
     }
+
+    $(document).ready(function(){
+        $('#submitBtn').click(function(){
+
+
+
+            var namabarang = $("#namabarang").val();
+            var hargabarang = $("#harga").val();
+            var kategori = $("#kategori").val();
+            var deskripsi = $("#deskripsi").val();
+            alert(namabarang);
+            alert(hargabarang);
+            alert(kategori);
+            alert(deskripsi);
+
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url: "addbarang",
+                type: "POST",
+                data: {
+                    nama:namabarang,
+                    kategori:kategori,
+                    deskripsi:deskripsi,
+                    harga:hargabarang,
+                },
+                success:function(data){
+                    // Swal.fire(
+                    //     'Sukses!',
+                    //     data,
+                    //     'success'
+                    // )
+                    console.log("masuk");
+                }
+            });
+        })
+    })
+
 </script>
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
 @endsection
 @section('customStyle')
 <style>

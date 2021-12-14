@@ -254,4 +254,16 @@ class userController extends Controller
         Auth::logout();
         return redirect('/');
     }
+
+    public function addBarang(Request $req)
+    {
+        $data = $req->all();
+        $nama = $data["nama"];
+        $kat = $data["kategori"];
+        $desc = $data["deskripsi"];
+        $harga = $data["harga"];
+        return response()->json(['success'=>'masuk']);
+
+        //tinggal insert ye
+    }
 }
