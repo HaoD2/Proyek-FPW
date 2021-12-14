@@ -11,10 +11,17 @@
 </div>
 <div class="main">
     <div class="bottomline"><h2>Featured Item</h2></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
+    @php
+        $barang=DB::table('barang')->get();
+    @endphp
+    @foreach ($barang as $barang)
+        <div class="card">
+            <h4 style="text-align: center">{{$barang->nama_barang}}</h4>
+            <img src="{{URL::asset('dummy.png')}}" style="width:90%; height:90%; margin:10px; border-radius:10px;">
+            <button class="btn btn-success" style="width:250px; margin-left:-6px;">Add to cart</button>
+        </div>
+    @endforeach
+
 </div>
 
 <script>
@@ -59,6 +66,8 @@
 
 @section('customStyle')
 <style>
+
+
 .mySlides{
     margin-top:30px;
     border-radius: 10px;
