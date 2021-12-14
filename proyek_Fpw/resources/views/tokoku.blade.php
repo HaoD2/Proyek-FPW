@@ -28,7 +28,7 @@
                             <option value="{{$kategori->id}}">{{$kategori->nama_kategori}}</option>
                         @endforeach
                     </select>
-                    <button type="button"  value="Submit" id="submitBtn" class="btn btn-success" style="width: 100%; height: 50px">Submit</button>
+                    <input type="submit" value="Submit">
                 </form>
             </div>
         </div>
@@ -82,47 +82,7 @@
         evt.currentTarget.className += " w3-red";
     }
 
-    $(document).ready(function(){
-        $('#submitBtn').click(function(){
 
-
-
-            var namabarang = $("#namabarang").val();
-            var hargabarang = $("#harga").val();
-            var kategori = $("#kategori").val();
-            var deskripsi = $("#deskripsi").val();
-            alert(namabarang);
-            alert(hargabarang);
-            alert(kategori);
-            alert(deskripsi);
-
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                url: "addbarang",
-                type: "POST",
-                data: {
-                    nama:namabarang,
-                    kategori:kategori,
-                    deskripsi:deskripsi,
-                    harga:hargabarang,
-                },
-                success:function(data){
-                    // Swal.fire(
-                    //     'Sukses!',
-                    //     data,
-                    //     'success'
-                    // )
-                    console.log("masuk");
-                }
-            });
-        })
-    })
 
 </script>
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])

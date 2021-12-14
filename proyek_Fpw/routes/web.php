@@ -44,9 +44,6 @@ Route::post('/senddata', [userController::class, 'verification'])->name('verify'
 Route::view('/verifyAdmin', 'adminconfver');
 Route::post('/verifyAdmin', [adminController::class, 'doVerify'])->name('verifyAdmin');
 
-Route::view('/addbarang', 'tokoku');
-Route::post('/addbarang', [userController::class, 'addBarang'])->name('addbarang');
-
 Route::get('/topup', function(){
     return view('topup');
 })->name('topup');
