@@ -122,6 +122,41 @@ class userController extends Controller
 
     }
 
+    public function updatebarang(Request $req){
+        $valid=[
+            "nama_barang"=> ["required"],
+            "kategori_barang"=>["required"],
+            "deskripsi"=>["required"],
+            "harga"=>["required"]
+        ];
+        $msg = [
+            "input tidak boleh kosong"
+        ];
+        $this->validate($req,$valid,$msg);
+
+        $user = Auth::user();
+        if($user->level == "admin"){
+            $req->session()->regenerate();
+            $user = user::all()->except(Auth::id());;
+            return view('admin',compact('user'));
+        }else if ($user->level == "user"){
+            if($user->status == 1){
+                $temp_data = barangmodel::where('nama_barang',"=",$req->nama_barang)->where('email_penjual','=',Auth::user()->email)->first();
+                $temp_data->nama_barang = $req->nama_barang;
+                $temp_data->kategori_barang = $req ->kategori_barang;
+                $temp_data->deskripsi = $req ->deskripsi;
+                $temp_data->harga = $req ->harga;
+                $temp_data->save();
+                Alert::success('Success update barang');
+                return view('tokoku');
+            }else{
+                Auth::logout();
+                Alert::error('Banned', 'Akun anda terkena suspend Ban !!');
+                return redirect('toLogin');
+            }
+        }
+    }
+
     public function acceptreq(Request $req)
     {
         $reqsaldo=request_saldo::all();
