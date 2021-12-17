@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\barangmodel;
 use App\Models\request_saldo;
+use App\Models\Cart;
+
 use App\Models\User;
 use App\Models\VerificationModel;
 use Facade\Ignition\DumpRecorder\Dump;
@@ -300,6 +302,19 @@ class userController extends Controller
         $send = json_encode($item);
         return response()->json(['success'=>$send]);
 
+    }
+
+    public function addtoCart(Request $req)
+    {
+        $data = $req->all();
+
+        Cart::create(
+            [
+                "email" => Auth::user()->email,
+                "id_barang" => $data["id"],
+            ]
+        );
+        return response()->json(['success'=>'yes']);
     }
 
 

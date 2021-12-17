@@ -3,6 +3,8 @@
 
 @section('mainContent')
     <div class="box">
+
+        <meta name="_token" content="{{ csrf_token() }}">
         <div class="d-flex align-content-stretch flex-wrap">
             @foreach (DB::table('kategori')->get() as $data)
             <button class="btn btn-primary mx-3 my-3" id="{{$data->id}}">{{$data->nama_kategori}}</button>
@@ -15,9 +17,9 @@
         </div>
     </div>
     <script>
+        var jum = 0;
 
         $(document).ready(function(){
-
             for (let i = 1; i <= 28; i++) {
                 $("#" + i).click(function () {
                     $('#outputdata').text("");
@@ -36,22 +38,54 @@
                         success:function(data){
                             var datas = data["success"];
                             var obj = JSON.parse(datas);
+                            jum = 0;
                             console.log(datas);
                             obj.forEach(datak => {
+                                jum++;
                                 $("#outputdata").append(
                                     "<div class=\"card\">" +
                                     "<h4 style=\"text-align: center\">" + datak["nama_barang"]+ "</h4>" +
                                     "<img src=\"{{URL::asset('dummy.png')}}\" style=\"width:90%; height:90%; margin:10px; border-radius:10px;\">" +
-                                    "<button class=\"btn btn-success\" style=\"width:250px; margin-left:-6px;\">Add to cart</button>" +
+                                    "<button class=\"btn btn-success\" id=\"cart\" value=\"" + datak["id"] + "\" onclick=\"click(" + datak["id"] + ")\" style=\"width:250px; margin-left:-6px;\" >Add to cart</button>" +
                                     "</div>"
                                 );
                             });
+
+                            // alert(jum);
+
                         }
+
                     })
+
+                })
+            }
+
+            $(document).on('click', '#cart', function() {
+                var temp = $(this).val();
+                ajax(temp);
+            });
+
+            function ajax(id)
+            {
+                $.ajaxSetup({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+                });
+
+                $.ajax({
+                    url: "{{ url('addCart') }}",
+                    type: "POST",
+                    data: {
+                        id:id,
+                    },
+                    success:function(data){
+                        console.log(data);
+                    }
                 })
             }
 
         })
+
+
     </script>
 @endsection
 

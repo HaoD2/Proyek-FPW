@@ -37,7 +37,7 @@
                     <script>
 
 
-                        var ktp = "";
+                            var ktp = "";
                             var selfie = "";
 
 
@@ -74,7 +74,7 @@
                                 });
 
                                 $.ajax({
-                                    url: "{{ route('verify') }}",
+                                    url: "verify",
                                     type: "POST",
                                     data: {
                                         ktp64: ktp,

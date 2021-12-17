@@ -126,3 +126,7 @@ Route::get('kategori', function(){
 Route::view('getKatData', 'kategori');
 
 Route::post('getKatData', [userController::class, 'getKatData']);
+
+
+Route::view('addCart', 'kategori');
+Route::post('addCart', [userController::class, 'addtoCart']);
