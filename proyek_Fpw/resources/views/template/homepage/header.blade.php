@@ -13,7 +13,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                 <li><a class="dropdown-item" href="/">Home</a></li>
-                <li><a class="dropdown-item" href="#">Kategori</a></li>
+                <li><a class="dropdown-item" href="/kategori">Kategori</a></li>
               @if(Auth::check())
                 <li><a class="dropdown-item" href="#">Keranjangku</a></li>
                 <li><a class="dropdown-item" href="#">Wishlistku</a></li>

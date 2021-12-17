@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
+use Illuminate\Support\Facades\DB;
+
+
 
 
 class userController extends Controller
@@ -288,6 +291,15 @@ class userController extends Controller
         Session::flush();
         Auth::logout();
         return redirect('/');
+    }
+
+    public function getKatData(Request $req)
+    {
+        $data = $req->all();
+        $item = DB::table('barang')->where('kategori_barang', '=',$data["id"])->get();
+        $send = json_encode($item);
+        return response()->json(['success'=>$send]);
+
     }
 
 

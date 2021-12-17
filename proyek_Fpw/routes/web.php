@@ -116,3 +116,13 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
 });
+
+Route::get('kategori', function(){
+    return view('kategori');
+});
+
+//getKatData
+
+Route::view('getKatData', 'kategori');
+
+Route::post('getKatData', [userController::class, 'getKatData']);
