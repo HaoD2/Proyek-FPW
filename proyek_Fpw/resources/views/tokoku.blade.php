@@ -53,7 +53,8 @@
                             <td>{{$barang->kategori_barang}}</td>
                             <td>{{$barang->deskripsi}}</td>
                             <td>{{$barang->harga}}</td>
-                            <td><form action="/gotoupdate" method="get"><button name="id" value="{{$barang->id}}">Update</button></form></td>
+                            <td><form action="/gotoupdate" method="get"><button name="id" value="{{$barang->id}}">Update</button></form>
+                                <form action="/deletebarang" method="get"><button name="id" value="{{$barang->id}}">Delete</button></form></td>
                         </tr>
                         @endif
                     @endforeach

@@ -85,6 +85,8 @@ Route::get('/gotoadmin_req', function(){
 Route::get('/gotoupdate', [userController::class,'gotoupdate']);
 Route::get('/updatebarang', [userController::class,'updatebarang']);
 
+Route::get('/deletebarang', [userController::class,'deletebarang']);
+
 Route::get('/action_editprofil', [userController::class,'editprofil'])->name('doEditprofil');
 Route::get('/action_gantipass', [userController::class,'gantipass'])->name('doGantipass');
 Route::get('/register', [userController::class,'doRegister'])->name('register');

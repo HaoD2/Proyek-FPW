@@ -154,7 +154,26 @@ class userController extends Controller
                 $temp_data->harga = $req ->harga;
                 $temp_data->save();
                 Alert::success('Success update barang');
-                return view('tokoku');
+                return redirect('tokoku');
+            }else{
+                Auth::logout();
+                Alert::error('Banned', 'Akun anda terkena suspend Ban !!');
+                return redirect('toLogin');
+            }
+        }
+    }
+
+    public function deletebarang(Request $req){
+        $user = Auth::user();
+        if($user->level == "admin"){
+            $req->session()->regenerate();
+            $user = user::all()->except(Auth::id());;
+            return view('admin',compact('user'));
+        }else if ($user->level == "user"){
+            if($user->status == 1){
+                barangmodel::where('id',"=",$req->id)->where('email_penjual','=',Auth::user()->email)->delete();
+                Alert::success('Success delete barang');
+                return redirect('tokoku');
             }else{
                 Auth::logout();
                 Alert::error('Banned', 'Akun anda terkena suspend Ban !!');
