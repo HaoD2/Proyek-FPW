@@ -25,7 +25,7 @@
                     <input type="number" name="harga" placeholder="Harga" id="harga"><br>
                     <select name="kategori" id="kategori">
                         @foreach ($kategori as $kategori)
-                            <option value="{{$kategori->id}}">{{$kategori->nama_kategori}}</option>
+                            <option value="{{$kategori->nama_kategori}}">{{$kategori->nama_kategori}}</option>
                         @endforeach
                     </select>
                     <input type="submit" value="Submit">
@@ -44,6 +44,7 @@
                         <th>Kategori</th>
                         <th>Deskripsi</th>
                         <th>Harga</th>
+                        <th>Action</th>
                     </tr>
                     @foreach ($barang as $barang)
                         @if ($barang->email_penjual==Auth::user()->email)
@@ -52,6 +53,7 @@
                             <td>{{$barang->kategori_barang}}</td>
                             <td>{{$barang->deskripsi}}</td>
                             <td>{{$barang->harga}}</td>
+                            <td><form action="/gotoupdate" method="get"><button name="id" value="{{$barang->id}}">Update</button></form></td>
                         </tr>
                         @endif
                     @endforeach

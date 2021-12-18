@@ -82,6 +82,8 @@ Route::get('/gotoadmin_verify', function(){
 Route::get('/gotoadmin_req', function(){
     return view('req_saldo_admin');
 });
+Route::get('/gotoupdate', [userController::class,'gotoupdate']);
+Route::get('/updatebarang', [userController::class,'updatebarang']);
 
 Route::get('/action_editprofil', [userController::class,'editprofil'])->name('doEditprofil');
 Route::get('/action_gantipass', [userController::class,'gantipass'])->name('doGantipass');

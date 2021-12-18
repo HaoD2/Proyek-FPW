@@ -1,6 +1,5 @@
 @extends('template.homepage.main')
 
-
 @section('mainContent')
 @php
     $data = \App\Models\isSeller::where('email', Auth::user()->email)->first();
@@ -32,16 +31,9 @@
                         <button id="submitVerif" type="button" class="btn btn-success submitVerif">Submit</button>
                     </form>
 
-
-
                     <script>
-
-
                             var ktp = "";
                             var selfie = "";
-
-
-
                             function encodeKTPFileAsURL(element) {
                                 var file = element.files[0];
                                 var reader = new FileReader();
@@ -66,7 +58,6 @@
 
                         $(document).ready(function() {
                             $("#submitVerif").click(function(){
-
                                 $.ajaxSetup({
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -88,9 +79,7 @@
                                         )
                                     }
                                 })
-
                             });
-
                         });
 
 

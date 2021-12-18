@@ -8,6 +8,7 @@ use App\Models\Cart;
 
 use App\Models\User;
 use App\Models\VerificationModel;
+use Barang;
 use Facade\Ignition\DumpRecorder\Dump;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Http\Request;
@@ -117,7 +118,7 @@ class userController extends Controller
                     ]
                 );
                 Alert::success('Success menginput barang');
-                return view('tokoku');
+                return redirect('tokoku');
             }else{
                 Auth::logout();
                 Alert::error('Banned', 'Akun anda terkena suspend Ban !!');
@@ -160,6 +161,16 @@ class userController extends Controller
                 return redirect('toLogin');
             }
         }
+    }
+
+
+
+    public function gotoupdate(Request $req)
+    {
+        $id=$req->input('id');
+        $data_barang=db::table('barang')->where('id','=',$id)->get();
+        $data_barang=json_encode($data_barang);
+        return view('tokoku-update',['data_barang'=>$data_barang]);
     }
 
     public function acceptreq(Request $req)
