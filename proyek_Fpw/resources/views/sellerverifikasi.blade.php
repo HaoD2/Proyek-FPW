@@ -22,14 +22,14 @@
             <div class="ml-5">
                 <div style="margin-left: 15px">
                     <meta name="csrf-token" content="{{ csrf_token() }}">
-                    <form>
+
                         <h1>Foto KTP</h1>
                         <input type="file" name="" id="ktp" class="btn btn-primary" onchange="encodeKTPFileAsURL(this)"><br><br>
                         <h1>Foto selfie dengan KTP</h1>
                         <input type="file" name="" id="selfie" class="btn btn-primary" onchange="encodeSelfieFileAsURL(this)"> <br><br>
 
                         <button id="submitVerif" type="button" class="btn btn-success submitVerif">Submit</button>
-                    </form>
+
 
                     <script>
                             var ktp = "";
@@ -65,7 +65,7 @@
                                 });
 
                                 $.ajax({
-                                    url: "verify",
+                                    url: "{{ route('verify') }}",
                                     type: "POST",
                                     data: {
                                         ktp64: ktp,

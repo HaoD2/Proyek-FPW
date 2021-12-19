@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\VerificationModel;
 use Barang;
 use Facade\Ignition\DumpRecorder\Dump;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -268,22 +269,14 @@ class userController extends Controller
     public function verification(Request $req)
     {
         $data = $req->all();
-        if($data['ktp64'] != "" && $data['selfie64'] != "")
-        {
-            VerificationModel::create(
-                [
-                    "email"=>Auth::user()->email,
-                    "foto" => $data['ktp64'],
-                    "selfie" =>$data['selfie64']
-                ]
-            );
-            return response()->json(['success'=>'Sukses Verifikasi, silahkan tunggu respon admin!']);
-        }
-        else{
-            return response()->json(['error'=>'Tidak boleh ada data yang kosong!']);
-        }
-
-
+        VerificationModel::create(
+            [
+                "email"=>Auth::user()->email,
+                "foto" => $data['ktp64'],
+                "selfie" =>$data['selfie64']
+            ]
+        );
+        return response()->json(['success'=>'Sukses Verifikasi, silahkan tunggu respon admin!']);
     }
 
     public function editprofil(Request $req){
@@ -338,13 +331,32 @@ class userController extends Controller
     {
         $data = $req->all();
 
-        Cart::create(
-            [
-                "email" => Auth::user()->email,
-                "id_barang" => $data["id"],
-            ]
-        );
-        return response()->json(['success'=>'yes']);
+        try{
+            $mycart = DB::table('cart')->where("id_barang", "=", $data["id"])
+            ->where("email", '=', Auth::user()->email)->first();
+
+            if($mycart != null)
+            {
+                return response()->json(['success'=>"udhada"]);
+
+            }
+            else{
+                Cart::create(
+                    [
+                        "email" => Auth::user()->email,
+                        "id_barang" => $data["id"],
+                    ]
+                );
+                return response()->json(['success'=>"sukses"]);
+            }
+
+        }
+        catch(\Exception $e)
+        {
+            return response()->json(['success'=>$e]);
+
+        }
+
     }
 
 

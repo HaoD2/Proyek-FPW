@@ -15,7 +15,7 @@
                 <li><a class="dropdown-item" href="/">Home</a></li>
                 <li><a class="dropdown-item" href="/kategori">Kategori</a></li>
               @if(Auth::check())
-                <li><a class="dropdown-item" href="#">Keranjangku</a></li>
+                <li><a class="dropdown-item" href="/mycart">Keranjangku</a></li>
                 <li><a class="dropdown-item" href="#">Wishlistku</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="/tokoku">Ke toko saya</a></li>

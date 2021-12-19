@@ -2,9 +2,12 @@
 
 
 @section('mainContent')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <div class="box">
+        @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@11"])
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <meta name="_token" content="{{ csrf_token() }}">
         <div class="d-flex align-content-stretch flex-wrap">
             @foreach (DB::table('kategori')->get() as $data)
             <button class="btn btn-primary mx-3 my-3" id="{{$data->id}}">{{$data->nama_kategori}}</button>
@@ -20,6 +23,7 @@
         var jum = 0;
 
         $(document).ready(function(){
+            // const katlist = ["p", "Buku", "Dapur", "Elektronik", ""];
             for (let i = 1; i <= 28; i++) {
                 $("#" + i).click(function () {
                     $('#outputdata').text("");
@@ -60,33 +64,47 @@
                 })
             }
 
-            $(document).on('click', '#cart', function() {
-                var temp = $(this).val();
-                ajax(temp);
+            $("#outputdata").one('click', '#cart', function(e) {
+                ajax($(this).val());
+
             });
 
             function ajax(id)
             {
                 $.ajaxSetup({
-                    headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     }
                 });
-
                 $.ajax({
-                    url: "{{ url('addCart') }}",
+                    url: "addCart",
                     type: "POST",
                     data: {
                         id:id,
                     },
                     success:function(data){
-                        console.log(data);
+                        if(data["success"] == "sukses")
+                        {
+                            alert("Sukses memasukkan kedalam keranjang");
+                        }
+                        else if(data["success"] == "udhada" ){
+                            alert("Barang sudah ada dalah keranjang");
+                        }
+
+                        $("#outputdata").one('click', '#cart', function(e) {
+                            ajax($(this).val());
+
+                        });
                     }
                 })
             }
+
 
         })
 
 
     </script>
+
 @endsection
 
 @section('customStyle')

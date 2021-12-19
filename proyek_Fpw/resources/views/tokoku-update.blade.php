@@ -15,7 +15,7 @@
             <input type="number" name="harga" placeholder="Harga" id="harga" value="{{$data_barang[0]['harga']}}"><br>
             <select name="kategori_barang" id="kategori">
                 @foreach ($kategori as $kategori)
-                    <option value="{{$kategori->nama_kategori}}">{{$kategori->nama_kategori}}</option>
+                    <option value="{{$kategori->id}}">{{$kategori->nama_kategori}}</option>
                 @endforeach
             </select>
             <input type="submit" value="update">
