@@ -279,6 +279,8 @@ class userController extends Controller
         return response()->json(['success'=>'Sukses Verifikasi, silahkan tunggu respon admin!']);
     }
 
+
+
     public function editprofil(Request $req){
         // $valid=[
         //     "fname"=> ["required"],
@@ -337,7 +339,7 @@ class userController extends Controller
 
             if($mycart != null)
             {
-                return response()->json(['success'=>"udhada"]);
+                return response()->json(['success'=>"udh ada"]);
 
             }
             else{
@@ -345,6 +347,7 @@ class userController extends Controller
                     [
                         "email" => Auth::user()->email,
                         "id_barang" => $data["id"],
+                        "jumlah" => 1
                     ]
                 );
                 return response()->json(['success'=>"sukses"]);
@@ -358,6 +361,29 @@ class userController extends Controller
         }
 
     }
+
+    public function checkout(Request $req)
+    {
+    //     $check_same = Cart::where('email','=',Auth::user()->email)->get();
+    //     $ctr =1;
+    //     $hargatotal = 0;
+
+    //     if (count($check_same)>0) {
+    //         foreach ($check_same as $value) {
+    //             $databarang = DB::table('barang')->where('id', '=', $value->id_barang)->first();
+    //             $hargabarang = $databarang->harga ;
+    //             $value->jumlah = $req->$ctr;
+    //             $value->save();
+    //             $hargatotal = $hargatotal + ($hargabarang*$req->$ctr);
+    //             $ctr++;
+    //         }
+
+    //         return view("/");
+    //     }else{
+    //         Alert::error('Gagal Register','Keranjang anda masih kosong');
+    //         return redirect("/mycart");
+    //     }
+     }
 
 
 }

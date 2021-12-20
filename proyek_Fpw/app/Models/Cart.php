@@ -9,7 +9,8 @@ class Cart extends Model
 {
     use HasFactory;
     protected $table = 'cart';
-    protected $fillable = ['email', 'id_barang'];
-    public $incrementing    = false;
+    protected $primaryKey = 'id';
+    protected $fillable = ['email', 'id_barang','jumlah'];
+    public $incrementing    = true;
     public $timestamps      = true;
 }

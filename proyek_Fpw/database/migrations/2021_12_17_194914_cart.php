@@ -14,8 +14,10 @@ class Cart extends Migration
     public function up()
     {
         Schema::create('cart', function (Blueprint $table) {
+            $table->id();
             $table->string('email')->references('email')->on('user')->onDelete('cascade');
             $table->integer('id_barang')->references('id')->on('barang')->onDelete('cascade');
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }

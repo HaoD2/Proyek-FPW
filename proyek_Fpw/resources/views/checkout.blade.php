@@ -5,7 +5,7 @@
 
 <div class="box">
 <table class="table">
-        <form action="/checkout" method="GET">
+
         <table class="table table-striped">
             <thead>
               <tr>
@@ -13,15 +13,12 @@
                 <th scope="col">Nama barang</th>
                 <th scope="col">Jumlah</th>
                 <th scope ="col">Harga per Barang</th>
-                <th scope ="col">Total harga/jenis</th>
               </tr>
             </thead>
             <tbody>
-
                 @php
                     $cartdata = DB::table('cart')->where('email', '=', Auth::user()->email)->get();
                     $ctr = 0;
-
                 @endphp
 
                 @foreach ($cartdata as $data)
@@ -36,49 +33,30 @@
                         </div>
                     </th>
                     <td>{{$databarang->nama_barang}}</td>
-                    <td><input type="number" name="{{$ctr}}" id="{{$ctr}}" style="width: 100px" min="1" max="99" value="1"></td>
-                    <td>  <div id="pp{{$ctr}}">{{$databarang->harga}}</div></td>
-                    <td>  <div id="total{{$ctr}}"></div></td>
+                    <td><p>{{$data->jumlah}}</p></td>
+                    <td><div id="pp">{{$databarang->harga}}</div></td>
 
-                  </tr>
+
+                    </tr>
 
                 @endforeach
-                <br>
-
+                @php
+                $hargatotal = Session::pull('hargatotal');
+                @endphp
+                <p>SubTotal:{{$hargatotal}}</p>
 
             </tbody>
           </table>
-          <div style="float: right" id="subtotal"></div>
-          <br>
-          <div style="float: right"><button class="btn btn-success">Checkout</button></div> <br><br>
-        </form>
+          <div style="float: right"><button class="btn btn-success">Bayar</button></div> <br><br>
     </div>
-
     <script>
-
         $(document).ready(function(){
-             var text="";
-             var temp ="<?php echo $ctr; ?>";
-                 temp = parseInt(temp);
-                 alert(temp);
-            for(var i = 1;i<=temp;i++){
-                $("#"+i).on("input", function() {
-                 var subtotal =0;
-                 var total=$("#"+i).val()* parseInt($('#pp'+i).text());
-
-                 $("#total"+i).text(total);
-                 subtotal = subtotal +$("#"+i).val()* $('#pp'+i).text();
-
-                for(var i = 1;i<=temp;i++){
-                   subtotal += parseInt($("#total"+i).text());
-                }
-                 $("#subtotal").text("SUBTOTAL:"+subtotal);
-                });
-            }
+            $("#jumbarang").on("input", function() {
+            });
 
 
-         })
-        </script>
+        })
+    </script>
 
 @endsection
 

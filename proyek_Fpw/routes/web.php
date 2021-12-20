@@ -118,6 +118,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/homepage', function(){
             return view('homepage');
         });
+
     });
 });
 
@@ -137,3 +138,4 @@ Route::post('addCart', [userController::class, 'addtoCart']);
 
 
 Route::view('mycart', 'cart');
+Route::get('/checkout', [userController::class, 'checkout'])->name('checkout');
