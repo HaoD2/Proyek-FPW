@@ -11,6 +11,7 @@ use App\Models\VerificationModel;
 use Barang;
 use Facade\Ignition\DumpRecorder\Dump;
 use GuzzleHttp\Psr7\Message;
+use Hjual;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,8 +22,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 use Illuminate\Support\Facades\DB;
 
-
-
+use function App\Http\Controllers\alert as ControllersAlert;
 
 class userController extends Controller
 {
@@ -364,26 +364,27 @@ class userController extends Controller
 
     public function checkout(Request $req)
     {
-    //     $check_same = Cart::where('email','=',Auth::user()->email)->get();
-    //     $ctr =1;
-    //     $hargatotal = 0;
+       $totalpesan = intval($req->input('total'));
+       $datauser =  User::find(Auth::user()->email);
+       if ($datauser->saldo > $totalpesan) {
+            $datauser->saldo  -= $totalpesan;
+            $datauser->save();
+            DB::table('hjual')->insert(
+                [
+                    "email_pembeli" => $datauser->email,
+                    "total_pembelian" => $totalpesan
+                ]
+            );
+            alert("Transaksi Sukses!");
 
-    //     if (count($check_same)>0) {
-    //         foreach ($check_same as $value) {
-    //             $databarang = DB::table('barang')->where('id', '=', $value->id_barang)->first();
-    //             $hargabarang = $databarang->harga ;
-    //             $value->jumlah = $req->$ctr;
-    //             $value->save();
-    //             $hargatotal = $hargatotal + ($hargabarang*$req->$ctr);
-    //             $ctr++;
-    //         }
-
-    //         return view("/");
-    //     }else{
-    //         Alert::error('Gagal Register','Keranjang anda masih kosong');
-    //         return redirect("/mycart");
-    //     }
-     }
+       }else{
+            alert("Transaksi Gagal,saldo anda tidak cukup!");
+            return view('cart');
+       }
+    }
 
 
+}
+function alert($msg){
+    echo "<script>alert('$msg')</script>";
 }

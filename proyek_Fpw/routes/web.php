@@ -138,4 +138,4 @@ Route::post('addCart', [userController::class, 'addtoCart']);
 
 
 Route::view('mycart', 'cart');
-Route::get('/checkout', [userController::class, 'checkout'])->name('checkout');
+Route::get('/bayar', [userController::class, 'checkout'])->name('bayar');

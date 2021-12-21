@@ -5,7 +5,7 @@
 
 <div class="box">
 <table class="table">
-        <form action="/checkout" method="GET">
+        <form action="{{route('bayar')}}" method="GET">
         <table class="table table-striped" id="itemtable">
             <thead>
               <tr>
@@ -55,6 +55,7 @@
                             subtotal += temp2;
                         }
                         $("#subtotal").text(subtotal);
+                        $("#totalharga").val(subtotal);
 
                             $('tbody').on('input','#inp',function() {
                                 var idx = $(this).siblings('input:hidden').val();
@@ -68,6 +69,7 @@
                                     subtotal += temp2;
                                 }
                                 $("#subtotal").text(subtotal);
+                                $("#totalharga").val(subtotal);
                             });
 
 
@@ -76,9 +78,9 @@
                 </script>
             </tbody>
           </table>
-          <div style="float: right"><span>Rp.</span><span id="subtotal"></span></div>
+          <div style="float: right"><span>Rp.</span><span id="subtotal"></span> <input type="hidden" name="total" id="totalharga"></div>
           <br>
-          <div style="float: right"><button class="btn btn-success">Checkout</button></div> <br><br>
+          <div style="float: right"><button class="btn btn-success">Bayar</button></div> <br><br>
         </form>
     </div>
 
