@@ -5,7 +5,7 @@
 
 <div class="box">
 <table class="table">
-        <form action="{{route('bayar')}}" method="GET">
+
         <table class="table table-striped" id="itemtable">
             <thead>
               <tr>
@@ -14,6 +14,7 @@
                 <th scope="col">Jumlah</th>
                 <th scope ="col">Harga per Barang</th>
                 <th scope ="col">Total harga/jenis</th>
+                <th scope ="col">Delete item</th>
               </tr>
             </thead>
             <tbody>
@@ -39,7 +40,9 @@
                     <td><input type="number" id="inp" style="width: 100px" min="1" max="99" value="1"><input type="hidden" name="" id="" value="{{$ctr}}"></td>
                     <td><span>Rp.</span>  <span id="pp{{$ctr}}">{{$databarang->harga}}</span></td>
                     <td><span>Rp.</span>  <span id="total{{$ctr}}">{{$databarang->harga}}</span></td>
-
+                    <form action="{{route('deletecart')}}" method="GET">
+                    <td><button id="delbtn" name="delbtn" value="{{$data->id_barang}}">delete</button></td>
+                    </form>
                   </tr>
 
                 @endforeach
@@ -78,6 +81,7 @@
                 </script>
             </tbody>
           </table>
+        <form action="{{route('bayar')}}" method="GET">
           <div style="float: right"><span>Rp.</span><span id="subtotal"></span> <input type="hidden" name="total" id="totalharga"></div>
           <br>
           <div style="float: right"><button class="btn btn-success">Bayar</button></div> <br><br>

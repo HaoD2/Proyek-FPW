@@ -139,3 +139,8 @@ Route::post('addCart', [userController::class, 'addtoCart']);
 
 Route::view('mycart', 'cart');
 Route::get('/bayar', [userController::class, 'checkout'])->name('bayar');
+Route::get('/deletecart', [userController::class, 'deletecart'])->name('deletecart');
+
+Route::get('/goto_riwayat', function(){
+    return view('riwayatbeli');
+});

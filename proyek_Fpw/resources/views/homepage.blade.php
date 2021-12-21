@@ -57,6 +57,40 @@
         x[slideIndex-1].style.display = "block";
         setTimeout(carousel, 2000);
     }
+    $("#outputdata").one('click', '#cart', function(e) {
+                ajax($(this).val());
+
+            });
+
+            function ajax(id)
+            {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     }
+                });
+                $.ajax({
+                    url: "addCart",
+                    type: "POST",
+                    data: {
+                        id:id,
+                    },
+                    success:function(data){
+                        if(data["success"] == "sukses")
+                        {
+                            alert("Sukses memasukkan kedalam keranjang");
+                        }
+                        else if(data["success"] == "udhada" ){
+                            alert("Barang sudah ada dalah keranjang");
+                        }
+
+                        $("#outputdata").one('click', '#cart', function(e) {
+                            ajax($(this).val());
+
+                        });
+                    }
+                })
+            }
 </script>
 @endsection
 

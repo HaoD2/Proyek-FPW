@@ -2,27 +2,54 @@
 
 
 @section('mainContent')
-
 <div class="box">
-    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white" style="float:left">
         <div class="position-sticky">
           <div class="list-group list-group-flush mt-1">
-            <a href="/goto_profile" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <a href="{{route('goto_profile')}}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
               <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Profil saya</span>
             </a>
-            <a href="/goto_keamanan" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <a href="/goto_keamanan" class="list-group-item list-group-item-action py-2 ripple " aria-current="true">
                 <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Keamanan</span>
             </a>
-            <a href="/goto_riwayat" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple active" aria-current="true">
                 <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Riwayat Pembelian saya</span>
             </a>
-
           </div>
         </div>
-      </nav>
+    </nav>
+    <div class="container1">
+        <div class="position-sticky">
+            <div class="list-group list-group-flush mt-1">
+                <table class="table table-striped" id="itemtable">
+                    <thead>
+                      <tr>
+                        <th scope="col">Total pembelian</th>
+                        <th scope="col">Keterangan</th>
+                      </tr>
+                    </thead>
+                    <tbody>
 
+                        @php
+                            $hjualdata = DB::table('hjual')->where('email_pembeli', '=', Auth::user()->email)->get();
+                            $ctr = 0;
+
+                        @endphp
+
+                        @foreach ($hjualdata as $data)
+                        <tr>
+                            <td>{{$data->total_pembelian}}</td>
+                            <td>{{$data->created_at}}</td>
+                        </tr>
+
+                        @endforeach
+
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+    </div>
 </div>
-
 
 @endsection
 
@@ -36,9 +63,31 @@
     padding: 10px;
     border-bottom-left-radius: 75px;
     border-bottom-right-radius: 75px;
-
 }
 
+button{
+    border: 1px solid black;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+h3{
+    text-align: center;
+}
+
+.container1{
+    margin:0 auto;
+    background-color: whitesmoke;
+}
+
+p{
+    font-size: 16px;
+    border-bottom: 1px solid lightgray;
+}
 .card{
     width:250px;
     height:300px;

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
 
@@ -366,21 +367,29 @@ class userController extends Controller
     {
        $totalpesan = intval($req->input('total'));
        $datauser =  User::find(Auth::user()->email);
-       if ($datauser->saldo > $totalpesan) {
+       if ($datauser->saldo >= $totalpesan) {
             $datauser->saldo  -= $totalpesan;
             $datauser->save();
             DB::table('hjual')->insert(
                 [
                     "email_pembeli" => $datauser->email,
-                    "total_pembelian" => $totalpesan
+                    "total_pembelian" => $totalpesan,
+                    "created_at" => Carbon::now()->toDateTimeString()
                 ]
             );
             alert("Transaksi Sukses!");
-
+            Cart::where('email', '=', Auth::user()->email)->delete();
+            return view('homepage');
        }else{
             alert("Transaksi Gagal,saldo anda tidak cukup!");
             return view('cart');
        }
+    }
+
+    public function deletecart(Request $req){
+        Cart::where('id_barang','=',$req->delbtn)->where('email_pembeli', '=', Auth::user()->email)->delete();
+        alert("sukses delete!");
+        return view('cart');
     }
 
 
