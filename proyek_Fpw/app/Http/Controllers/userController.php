@@ -387,7 +387,7 @@ class userController extends Controller
     }
 
     public function deletecart(Request $req){
-        Cart::where('id_barang','=',$req->delbtn)->where('email_pembeli', '=', Auth::user()->email)->delete();
+        Cart::where('id_barang','=',$req->delbtn)->where('email', '=', Auth::user()->email)->delete();
         alert("sukses delete!");
         return view('cart');
     }
