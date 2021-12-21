@@ -6,7 +6,7 @@
 <div class="box">
 <table class="table">
         <form action="/checkout" method="GET">
-        <table class="table table-striped">
+        <table class="table table-striped" id="itemtable">
             <thead>
               <tr>
                 <th scope="col">Barang</th>
@@ -36,49 +36,53 @@
                         </div>
                     </th>
                     <td>{{$databarang->nama_barang}}</td>
-                    <td><input type="number" name="{{$ctr}}" id="{{$ctr}}" style="width: 100px" min="1" max="99" value="1"></td>
-                    <td>  <div id="pp{{$ctr}}">{{$databarang->harga}}</div></td>
-                    <td>  <div id="total{{$ctr}}"></div></td>
+                    <td><input type="number" id="inp" style="width: 100px" min="1" max="99" value="1"><input type="hidden" name="" id="" value="{{$ctr}}"></td>
+                    <td><span>Rp.</span>  <span id="pp{{$ctr}}">{{$databarang->harga}}</span></td>
+                    <td><span>Rp.</span>  <span id="total{{$ctr}}">{{$databarang->harga}}</span></td>
 
                   </tr>
 
                 @endforeach
                 <br>
+                <div id="counterrr" style="display: none">{{$ctr}}</div>
+                <script>
+
+                    $(document).ready(function(){
+                        var text= "";
+                        var subtotal = 0;
+                        for (let i = 1; i <= parseInt($("#counterrr").text()); i++) {
+                            var temp2 = parseInt($("#total"+i).text());
+                            subtotal += temp2;
+                        }
+                        $("#subtotal").text(subtotal);
+
+                            $('tbody').on('input','#inp',function() {
+                                var idx = $(this).siblings('input:hidden').val();
+                                var total = parseInt($(this).val()) * parseInt($("#pp" + (idx)).text());
+                                $("#total" + (idx)).text(total);
+                                var temp = parseInt($("#counterrr").text());
+                                var subtotal = 0;
+
+                                for (let i = 1; i <= temp; i++) {
+                                    var temp2 = parseInt($("#total"+i).text());
+                                    subtotal += temp2;
+                                }
+                                $("#subtotal").text(subtotal);
+                            });
 
 
+
+                    })
+                </script>
             </tbody>
           </table>
-          <div style="float: right" id="subtotal"></div>
+          <div style="float: right"><span>Rp.</span><span id="subtotal"></span></div>
           <br>
           <div style="float: right"><button class="btn btn-success">Checkout</button></div> <br><br>
         </form>
     </div>
 
-    <script>
 
-        $(document).ready(function(){
-             var text="";
-             var temp ="<?php echo $ctr; ?>";
-                 temp = parseInt(temp);
-                 alert(temp);
-            for(var i = 1;i<=temp;i++){
-                $("#"+i).on("input", function() {
-                 var subtotal =0;
-                 var total=$("#"+i).val()* parseInt($('#pp'+i).text());
-
-                 $("#total"+i).text(total);
-                 subtotal = subtotal +$("#"+i).val()* $('#pp'+i).text();
-
-                for(var i = 1;i<=temp;i++){
-                   subtotal += parseInt($("#total"+i).text());
-                }
-                 $("#subtotal").text("SUBTOTAL:"+subtotal);
-                });
-            }
-
-
-         })
-        </script>
 
 @endsection
 
