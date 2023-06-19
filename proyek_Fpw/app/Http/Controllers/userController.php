@@ -33,10 +33,10 @@ class userController extends Controller
             "password"=>["required"],
         ]);
         if(Auth::attempt($credentials)){
-            $user = Auth::user();
+            $user = Auth::Akun();
             if($user->level == "admin"){
                 $req->session()->regenerate();
-                $user = user::all()->except(Auth::id());;
+                $user = Akun::all()->except(Auth::id());;
                 return view('admin',compact('user'));
 
             }else if ($user->level == "user"){
